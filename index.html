@@ -1,0 +1,3053 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Cache-busting timestamp: 2026-03-20-14-25 -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eyescone Intelligence — Investor Pitch</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300;400;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* ── Investor-light palette ── */
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --surface2: #f1f5f9;
+            --border: rgba(15,23,42,0.08);
+            --border2: rgba(15,23,42,0.14);
+            --cyan: #0d9488;
+            --cyan2: #14b8a6;
+            --slate: #94a3b8;
+            --slate2: #475569;
+            --white: #0f172a;
+            --white2: #1e293b;
+            --muted: rgba(15,23,42,0.5);
+            --red: #dc2626;
+            --amber: #d97706;
+            --green: #16a34a;
+            --font-display: 'IBM Plex Serif', serif;
+            --font-body: 'IBM Plex Sans', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+
+            /* ── Legacy aliases so existing slide markup still works ── */
+            --midnight-blue-dark: #1e293b;
+            --midnight-blue: #334155;
+            --cyan-primary: #0d9488;
+            --cyan-light: #14b8a6;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-600: #475569;
+            --gray-800: #1e293b;
+            --silver-light: #e2e8f0;
+            --silver-mid: #94a3b8;
+            --silver-dark: #0d9488;
+            --charcoal: #334155;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--white);
+            background: var(--bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100vw;
+            max-width: 100%;
+        }
+
+        /* ── Noise texture overlay (investor look) ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: .018;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-size: 200px;
+        }
+
+        html { scroll-behavior: smooth; overflow-x: hidden; width: 100vw; max-width: 100%; }
+        
+        /* Default .slide styling for desktop */
+        .slide {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @media print {
+            @page {
+                size: 1280px 720px;
+                margin: 0;
+            }
+            
+            .slide {
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+            
+            .slide:last-child {
+                page-break-after: auto;
+            }
+            
+            body {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            /* Fix for gradient text rendering as underline/artifact in PDF */
+            span[style*="-webkit-text-fill-color:transparent"],
+            span[style*="-webkit-text-fill-color: transparent"] {
+                -webkit-text-fill-color: var(--cyan) !important;
+                background: none !important;
+                color: var(--cyan) !important;
+                text-decoration: none !important;
+            }
+        }
+
+        /* ───────────────────────────────────────────────────────────── */
+        /* MOBILE RESPONSIVE - Tablets & Large Phones (768px - 1024px)   */
+        /* ───────────────────────────────────────────────────────────── */
+        @media (max-width: 1024px) {
+            .slide {
+                width: 100%;
+                height: auto;
+                min-height: 100vh;
+                padding: 0;
+                overflow: visible;
+            }
+            
+            .content-wrapper {
+                padding: 40px 32px;
+                min-height: auto;
+            }
+            
+            h1 { font-size: 32px; }
+            h2 { font-size: 18px; }
+            h3 { font-size: 16px; }
+            p, li { font-size: 16px; }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            
+            .three-column {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            #phase-tabs {
+                flex-wrap: wrap !important;
+                padding: 16px 24px 0 !important;
+                gap: 6px !important;
+                justify-content: flex-start !important;
+                overflow-x: auto !important;
+            }
+            
+            .phase-tab {
+                font-size: 11px !important;
+                padding: 8px 12px !important;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            
+            .phase-tab .tab-dot {
+                display: none;
+            }
+        }
+
+        /* ───────────────────────────────────────────────────────────── */
+        /* MOBILE - Small Phones & Tablets (480px - 767px)               */
+        /* ───────────────────────────────────────────────────────────── */
+        @media (max-width: 767px) {
+            body {
+                font-size: 14px;
+            }
+            
+            .slide {
+                width: 100%;
+                height: auto;
+                min-height: 100vh;
+                padding: 0;
+                overflow: visible;
+                border-radius: 0;
+            }
+            
+            .content-wrapper {
+                padding: 32px 20px;
+                height: auto;
+                min-height: auto;
+            }
+            
+            h1 { 
+                font-size: 24px;
+                line-height: 1.2;
+                margin-bottom: 16px;
+            }
+            
+            h2 { 
+                font-size: 16px;
+                margin-bottom: 12px;
+            }
+            
+            h3 { 
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+            
+            h4 {
+                font-size: 12px;
+                margin-bottom: 8px;
+            }
+            
+            p, li { 
+                font-size: 14px;
+                line-height: 1.6;
+            }
+            
+            .header-bar {
+                width: 40px;
+                height: 2px;
+                margin: 10px 0 20px 0;
+            }
+            
+            .two-column,
+            .three-column {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            #phase-tabs {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                padding: 12px 16px 0 !important;
+                gap: 4px !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
+                justify-content: flex-start !important;
+            }
+            
+            .phase-tab {
+                font-size: 10px !important;
+                padding: 6px 8px !important;
+                white-space: nowrap;
+                flex-shrink: 0;
+                min-width: auto;
+            }
+            
+            .phase-tab .tab-dot {
+                display: none;
+            }
+            
+            .phase-tab span:not(.tab-dot) {
+                display: none;
+            }
+            
+            .phase-tab::before {
+                content: attr(data-phase);
+                font-weight: 600;
+            }
+            
+            /* ─────────────────────────────────────────────────── */
+            /* Market Opportunities - Stack 3 columns to 1 on mobile */
+            /* ─────────────────────────────────────────────────── */
+            .three-column {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+            
+            /* ─────────────────────────────────────────────────── */
+            /* Problem Section - Stack 2-column flex layout          */
+            /* ─────────────────────────────────────────────────── */
+            div[style*="display: flex; gap: 48px; margin-top: 15px"] {
+                flex-direction: column !important;
+                gap: 32px !important;
+            }
+            
+            div[style*="display: flex; gap: 48px; margin-top: 15px"] > div:nth-child(2) {
+                display: none !important;
+            }
+            
+            /* ─────────────────────────────────────────────────── */
+            /* Solution Stages - Stack 3 stages to 1 on mobile      */
+            /* ─────────────────────────────────────────────────── */
+            div[style*="grid-template-columns: 1fr 32px 1fr 32px 1fr"] {
+                grid-template-columns: 1fr !important;
+                height: auto !important;
+                gap: 20px !important;
+            }
+            
+            div[style*="grid-template-columns: 1fr 32px 1fr 32px 1fr"] > div {
+                border-radius: 4px !important;
+            }
+            
+            div[style*="grid-template-columns: 1fr 32px 1fr 32px 1fr"] > div:nth-child(2),
+            div[style*="grid-template-columns: 1fr 32px 1fr 32px 1fr"] > div:nth-child(4) {
+                display: none !important;
+            }
+            
+            /* Hide horizontal dividers in tabs on mobile */
+            #phase-tabs > div {
+                display: none !important;
+            }
+            
+            /* ─────────────────────────────────────────────────── */
+            /* Why Now section - Stack points vertically on mobile */
+            /* ─────────────────────────────────────────────────── */
+            ul[style*="columns: 2"] {
+                columns: 1 !important;
+                column-gap: 0 !important;
+            }
+            
+            ul[style*="columns: 2"] li {
+                display: block;
+                margin-bottom: 16px;
+                break-inside: avoid;
+            }
+            
+            /* ───────────────────────────────────────────────────────── */
+            /* Why Eyescone Wins section - Stack cards vertically         */
+            /* ───────────────────────────────────────────────────────── */
+            div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+            }
+            
+            .card-accent {
+                width: 100% !important;
+            }
+            
+            /* ─────────────────────────────────────────────────── */
+            /* Navbar - Hide navigation on mobile, keep company name */
+            /* ─────────────────────────────────────────────────── */
+            nav ul {
+                display: none !important;
+            }
+            
+            nav > div:last-child {
+                display: none !important;
+            }
+            
+            nav {
+                padding: 14px 20px !important;
+                justify-content: flex-start !important;
+            }
+            
+            nav > div:first-child {
+                font-size: 14px !important;
+            }
+            
+            /* Factory Floor responsive */
+            #factory-floor {
+                flex-direction: column;
+                gap: 16px !important;
+            }
+            
+            .fc-step {
+                flex: 1 !important;
+                min-width: 0;
+            }
+            
+            .fc-arrow {
+                display: none !important;
+            }
+            
+            .fc-name {
+                font-size: 12px !important;
+            }
+            
+            .fc-badge {
+                font-size: 11px !important;
+                padding: 4px 8px !important;
+            }
+            
+            /* Grid adjustments */
+            .metric-card {
+                padding: 20px !important;
+                min-height: auto;
+            }
+            
+            .timeline-item {
+                padding: 16px !important;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            table th,
+            table td {
+                padding: 8px 4px !important;
+            }
+        }
+
+        /* ───────────────────────────────────────────────────────────── */
+        /* EXTRA SMALL - Phones < 480px                                  */
+        /* ───────────────────────────────────────────────────────────── */
+        @media (max-width: 480px) {
+            body {
+                font-size: 12px;
+            }
+            
+            .content-wrapper {
+                padding: 24px 16px;
+            }
+            
+            h1 { 
+                font-size: 20px;
+                margin-bottom: 12px;
+            }
+            
+            h2 { 
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+            
+            h3 { 
+                font-size: 12px;
+            }
+            
+            p, li { 
+                font-size: 12px;
+                line-height: 1.5;
+            }
+            
+            .header-bar {
+                width: 32px;
+                height: 2px;
+                margin: 8px 0 16px 0;
+            }
+            
+            #phase-tabs {
+                padding: 10px 12px 0 !important;
+                gap: 2px !important;
+                overflow-x: auto;
+            }
+            
+            .phase-tab {
+                font-size: 9px !important;
+                padding: 5px 6px !important;
+            }
+            
+            .metric-card {
+                padding: 16px !important;
+            }
+            
+            table {
+                font-size: 11px;
+                display: block;
+                overflow-x: auto;
+            }
+            
+            table th,
+            table td {
+                padding: 6px 3px !important;
+            }
+            
+            /* ─────────────────────────────────────────────────── */
+            /* Why Now section - Stack points vertically           */
+            /* ─────────────────────────────────────────────────── */
+            ul[style*="columns: 2"] {
+                columns: 1 !important;
+                column-gap: 0 !important;
+            }
+            
+            ul[style*="columns: 2"] li {
+                display: block;
+                margin-bottom: 12px;
+                break-inside: avoid;
+            }
+            
+            /* ───────────────────────────────────────────────────────── */
+            /* Why Eyescone Wins section - Stack cards vertically        */
+            /* ───────────────────────────────────────────────────────── */
+            div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+            
+            .card-accent {
+                width: 100% !important;
+            }
+            
+            /* ─────────────────────────────────────────────────── */
+            /* Navbar - Hide navigation on mobile, keep company name */
+            /* ─────────────────────────────────────────────────── */
+            nav ul {
+                display: none !important;
+            }
+            
+            nav > div:last-child {
+                display: none !important;
+            }
+            
+            nav {
+                padding: 10px 16px !important;
+                justify-content: flex-start !important;
+            }
+            
+            nav > div:first-child {
+                font-size: 12px !important;
+            }
+            
+            /* ─────────────────────────────────────────────────── */
+            /* Market Opportunities - Stack 3 columns to 1         */
+            /* ─────────────────────────────────────────────────── */
+            .three-column {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+            
+            /* ─────────────────────────────────────────────────── */
+            /* Problem Section - Stack 2-column flex layout         */
+            /* ─────────────────────────────────────────────────── */
+            div[style*="display: flex; gap: 48px; margin-top: 15px"] {
+                flex-direction: column !important;
+                gap: 24px !important;
+            }
+            
+            div[style*="display: flex; gap: 48px; margin-top: 15px"] > div:nth-child(2) {
+                display: none !important;
+            }
+            
+            /* ─────────────────────────────────────────────────── */
+            /* Solution Stages - Stack 3 stages to 1                */
+            /* ─────────────────────────────────────────────────── */
+            div[style*="grid-template-columns: 1fr 32px 1fr 32px 1fr"] {
+                grid-template-columns: 1fr !important;
+                height: auto !important;
+                gap: 16px !important;
+            }
+            
+            div[style*="grid-template-columns: 1fr 32px 1fr 32px 1fr"] > div {
+                border-radius: 4px !important;
+            }
+            
+            div[style*="grid-template-columns: 1fr 32px 1fr 32px 1fr"] > div:nth-child(2),
+            div[style*="grid-template-columns: 1fr 32px 1fr 32px 1fr"] > div:nth-child(4) {
+                display: none !important;
+            }
+        }
+
+        /* ───────────────────────────────────────────────────────────── */
+        /* LANDSCAPE MODE - Mobile landscape optimizations                */
+        /* ───────────────────────────────────────────────────────────── */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .slide {
+                min-height: auto;
+                height: auto;
+            }
+            
+            .content-wrapper {
+                padding: 24px 32px;
+            }
+            
+            h1 { font-size: 28px; }
+            h2 { font-size: 16px; }
+            
+            #phase-tabs {
+                padding: 12px 24px 0 !important;
+            }
+        }
+        
+        h1 {
+            font-family: var(--font-display);
+            font-size: 42px;
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        
+        h2 {
+            font-family: var(--font-display);
+            font-size: 21px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+        
+        h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        p, li {
+            font-size: 18px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+        
+        strong {
+            font-weight: 600;
+            color: var(--white2);
+        }
+        
+        .highlight {
+            color: var(--cyan);
+            font-weight: 600;
+        }
+        
+        .content-wrapper {
+            padding: 56px 72px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header-bar {
+            width: 52px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cyan) 0%, var(--cyan2) 100%);
+            margin: 14px 0 28px 0;
+            border-radius: 2px;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 36px;
+        }
+        
+        .content-wrapper {
+            padding: 56px 72px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight {
+            color: var(--cyan);
+            font-weight: 600;
+        }
+
+        p, li {
+            font-size: 18px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--white2);
+        }
+        
+        .metric-card {
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            border-left: 3px solid var(--cyan);
+            padding: 28px;
+            border-radius: 8px;
+            color: var(--white);
+            transition: transform .25s, border-color .25s;
+        }
+        .metric-card:hover { transform: translateX(4px); border-color: var(--cyan2); }
+        
+        .metric-number {
+            font-family: var(--font-display);
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--cyan);
+            line-height: 1;
+            margin-bottom: 10px;
+            -webkit-text-fill-color: unset;
+            background: none;
+        }
+        
+        .metric-label {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--slate2);
+            line-height: 1.5;
+        }
+        
+        ul {
+            list-style: none;
+            margin: 14px 0;
+        }
+        
+        ul li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 5px;
+            height: 5px;
+            background: var(--cyan);
+            border-radius: 50%;
+        }
+        
+        .container-visual {
+            position: relative;
+            width: 700px;
+            height: 400px;
+            margin: 40px auto;
+        }
+        
+        .container-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 20px rgba(6,182,212,0.3));
+        }
+        
+        .progress-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 580px;
+            background: linear-gradient(180deg, rgba(13,148,136,0.06) 0%, rgba(6,182,212,0.4) 100%);
+            border-radius: 2px 2px 0 0;
+            box-shadow: 0 0 30px rgba(6,182,212,0.3);
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-display);
+            font-size: 36px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--cyan-primary) 0%, var(--cyan-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            z-index: 3;
+        }
+        
+        #cover {
+            background: var(--surface2);
+            color: var(--white2);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .tagline {
+            font-size: 14px;
+            font-weight: 400;
+            margin: 20px 0 36px 0;
+            color: var(--slate2);
+            max-width: 800px;
+        }
+        
+        .stage-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(13,148,136,0.08);
+            border: 1px solid rgba(13,148,136,0.3);
+            border-radius: 100px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--cyan);
+            letter-spacing: 0.08em;
+            margin-top: 24px;
+        }
+        
+        .product-card {
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            border-left: 3px solid var(--cyan);
+            padding: 22px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            box-shadow: 0 2px 8px rgba(15,23,42,0.06);
+            transition: transform .2s, border-color .2s;
+        }
+        .product-card:hover { transform: translateX(3px); }
+        
+        .product-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+        
+        .status-live {
+            background: rgba(22,163,74,0.08);
+            color: var(--green);
+        }
+        
+        .status-pilot {
+            background: rgba(13,148,136,0.08);
+            color: var(--cyan);
+        }
+        
+        .status-rd {
+            background: rgba(217,119,6,0.08);
+            color: var(--amber);
+        }
+        
+        .timeline-row {
+            display: flex;
+            gap: 24px;
+            margin: 18px 0;
+            align-items: center;
+        }
+        
+        .timeline-period {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--cyan);
+            min-width: 130px;
+        }
+        
+        .timeline-bar {
+            flex: 1;
+            height: 6px;
+            background: var(--border);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timeline-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cyan), var(--cyan2));
+            border-radius: 4px;
+        }
+        
+        .timeline-desc {
+            font-size: 15px;
+            color: var(--slate2);
+            min-width: 280px;
+        }
+        
+        .bg-dark {
+            background: var(--surface2);
+            color: var(--white);
+        }
+        
+        .bg-dark h2, .bg-dark h3, .bg-dark h4 {
+            color: var(--white);
+        }
+        
+        .bg-dark .header-bar {
+            background: linear-gradient(90deg, var(--cyan) 0%, var(--cyan2) 100%);
+        }
+        
+        .bg-light {
+            background: var(--bg);
+        }
+        
+        .card-light {
+            background: var(--surface);
+            padding: 28px;
+            border-radius: 8px;
+            border: 1px solid var(--border2);
+            box-shadow: 0 2px 12px rgba(15,23,42,0.06);
+        }
+        
+        .card-accent {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--cyan);
+            padding: 24px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color .25s, transform .2s;
+        }
+        .card-accent:hover { border-color: var(--border2); transform: translateY(-2px); }
+        .card-accent::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--cyan), transparent);
+        }
+        .card-accent:nth-child(2)::before { background: linear-gradient(90deg, var(--amber), transparent); }
+        .card-accent:nth-child(3)::before { background: linear-gradient(90deg, var(--slate2), transparent); }
+        .card-accent:nth-child(4)::before { background: linear-gradient(90deg, var(--green), transparent); }
+        
+        .footnote {
+            font-size: 11px;
+            opacity: 0.5;
+            vertical-align: super;
+            font-weight: 500;
+            font-family: var(--font-mono);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+        
+        th, td {
+            text-align: left;
+            padding: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        th {
+            font-size: 12px;
+            font-weight: 600;
+            font-family: var(--font-mono);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--slate2);
+            background: var(--surface2);
+        }
+        
+        td {
+            font-size: 15px;
+            color: var(--slate2);
+        }
+        
+        .checkmark {
+            color: var(--green);
+            font-size: 18px;
+            margin-right: 6px;
+        }
+
+        /* ── Subtle grid pattern on all slides (investor style) ── */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.045;
+            background-image:
+                linear-gradient(rgba(15,23,42,0.6) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15,23,42,0.6) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%);
+        }
+
+        /* Ensure slide content sits above the background */
+        .slide > * { position: relative; z-index: 1; }
+        .slide .content-wrapper { position: relative; z-index: 1; }
+
+        /* Mobile responsive styles */
+        @media screen and (max-width: 768px) {
+            #cover > div:first-child {
+                width: 150% !important;
+                height: 150% !important;
+            }
+            
+            #cover > div:nth-child(4) {
+                top: 40px !important;
+            }
+            
+            #cover > div:nth-child(4) h1 {
+                font-size: 40px !important;
+                padding: 0 20px;
+            }
+            
+            #cover > div:nth-child(4) h1 span {
+                display: block;
+            }
+            
+            #cover > div:nth-child(5) {
+                bottom: 80px !important;
+                padding: 0 20px;
+            }
+            
+            #cover > div:nth-child(5) p:first-child {
+                font-size: 13px !important;
+            }
+            
+            #cover > div:nth-child(5) p:last-child {
+                font-size: 14px !important;
+            }
+            
+            #cover > div:nth-child(5) div {
+                width: 100px !important;
+                margin: 0 auto 20px !important;
+            }
+            
+            .content-wrapper {
+                padding: 50px 40px !important;
+            }
+            
+            h2 {
+                font-size: 21px !important;
+            }
+            
+            h3 {
+                font-size: 21px !important;
+            }
+            
+            p, li {
+                font-size: 18px !important;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            #cover > div:nth-child(4) h1 {
+                font-size: 21px !important;
+            }
+            
+            #cover > div:nth-child(5) p:first-child {
+                font-size: 18px !important;
+                line-height: 1.4 !important;
+            }
+            
+            h2 {
+                font-size: 16px !important;
+            }
+        }
+
+        /* ── Investor-style animations ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up { animation: fadeUp .65s ease both; }
+
+        /* ── Section label (monospaced eyebrow) ── */
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* ── Slide headings ── */
+        .slide h2 {
+            color: var(--white);
+        }
+        .slide .content-wrapper > h2 {
+            font-size: clamp(22px, 2.5vw, 32px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* ── Ensure slide > * sits above grid bg ── */
+        .slide > * { position: relative; z-index: 1; }
+
+        /* ── Factory sequence section bg ── */
+        #factory-sequence { background: var(--bg); }
+        #factory-sticky { background: var(--bg) !important; }
+
+        /* ── H2 HERO SECTION CSS ── */
+        section { position:relative; z-index:1; }
+
+        #hero {
+          min-height:100vh;
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          justify-content:center;
+          text-align:center;
+          padding:120px 48px 80px;
+          overflow:hidden;
+        }
+        .hero-grid {
+          position:absolute;inset:0;
+          background-image:
+            linear-gradient(rgba(15,23,42,0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(15,23,42,0.06) 1px, transparent 1px);
+          background-size:60px 60px;
+          mask-image:radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%);
+        }
+        .hero-glow {
+          position:absolute;width:700px;height:400px;
+          background:radial-gradient(ellipse, rgba(13,148,136,0.06) 0%, transparent 70%);
+          top:50%;left:50%;transform:translate(-50%, -50%);pointer-events:none;
+        }
+        .eyebrow {
+          font-family:var(--font-mono);font-size:11px;letter-spacing:0.25em;
+          text-transform:uppercase;color:var(--cyan);margin-bottom:28px;
+          display:flex;align-items:center;gap:12px;
+        }
+        .eyebrow::before,.eyebrow::after {
+          content:'';display:block;width:32px;height:1px;background:var(--cyan);opacity:.5;
+        }
+        h1.hero-title {
+          font-family:var(--font-display);font-size:clamp(52px,7vw,88px);
+          font-weight:800;line-height:1.0;letter-spacing:-0.03em;margin-bottom:28px;
+        }
+        .hero-title .line1 { color:var(--white); }
+        .hero-title .line2 {
+          background:linear-gradient(135deg,var(--cyan) 0%,var(--cyan2) 60%,#0d9488 100%);
+          -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+        }
+        .hero-sub { font-size:18px;font-weight:300;color:var(--muted);max-width:560px;margin:0 auto 56px;line-height:1.7; }
+        .hero-stats { display:flex;gap:0;border:1px solid var(--border2);border-radius:12px;overflow:hidden;background:var(--surface); }
+        .hero-stat { padding:24px 40px;text-align:center;border-right:1px solid var(--border2);position:relative; }
+        .hero-stat:last-child { border-right:none; }
+        .stat-val { font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--white);display:block;margin-bottom:4px; }
+        .stat-val.live { color:var(--cyan); }
+        .stat-label { font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--slate);display:block; }
+        .scroll-hint { display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:64px;color:var(--slate);font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase; }
+        .scroll-line { width:1px;height:40px;background:linear-gradient(to bottom,var(--slate),transparent); }
+
+        /* ── CONTACT SECTION CSS ── */
+        #contact { background:var(--surface);position:relative;overflow:hidden; }
+        #contact::before {
+          content:'';position:absolute;bottom:-200px;left:50%;transform:translateX(-50%);
+          width:800px;height:400px;background:radial-gradient(ellipse,rgba(13,148,136,0.04) 0%,transparent 70%);pointer-events:none;
+        }
+        .contact-inner { text-align:center;padding:100px 48px;max-width:760px;margin:0 auto;position:relative;z-index:1; }
+        .contact-details { display:flex;flex-direction:column;gap:16px;align-items:center; }
+        .contact-name { font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--white); }
+        .contact-row { display:flex;gap:32px;align-items:center; }
+        .contact-link { font-size:16px;color:var(--slate2);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:8px; }
+        .contact-link:hover { color:var(--cyan); }
+        .contact-location { font-family:var(--font-mono);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--slate); }
+        .contact-divider { width:1px;height:20px;background:var(--border2); }
+        .contact-cta { display:inline-flex;align-items:center;gap:8px;margin-top:32px;padding:14px 32px;background:var(--cyan);color:white;border-radius:100px;font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:background .2s,transform .2s; }
+        .contact-cta:hover { background:var(--cyan2);transform:translateY(-2px); }
+
+        /* ── DISCLAIMER CSS ── */
+        .disclaimer { background:#f1f5f9;padding:28px 48px;text-align:center; }
+        .disclaimer p { font-size:11px;color:var(--slate);line-height:1.7;max-width:680px;margin:0 auto; }
+
+        /* ── SECTION TITLE for contact ── */
+        .section-title { font-family:var(--font-display);font-size:clamp(32px,5vw,48px);font-weight:700;letter-spacing:-0.02em;color:var(--white);margin-bottom:16px; }
+        .section-desc { font-size:17px;font-weight:300;color:var(--muted);max-width:640px;line-height:1.7; }
+
+        /* ── MOBILE: hero stats stack, contact row ── */
+        @media (max-width:768px) {
+          .hero-stats { flex-direction:column;width:90%;max-width:400px; }
+          .hero-stat { border-right:none;border-bottom:1px solid var(--border2); }
+          .hero-stat:last-child { border-bottom:none; }
+          #hero { padding:100px 24px 60px; }
+          h1.hero-title { font-size:clamp(40px,10vw,72px); }
+          .contact-inner { padding:72px 24px; }
+          .contact-row { flex-direction:column;gap:16px; }
+          .contact-divider { display:none; }
+        }
+        /* ── NAV on mobile ── */
+        nav { position:fixed;top:0;left:0;right:0;z-index:200;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(248,250,252,0.96),transparent);backdrop-filter:blur(12px); }
+        .nav-logo { font-family:var(--font-display);font-size:17px;font-weight:700;letter-spacing:0.08em;color:var(--white); }
+        .nav-logo span { color:var(--cyan); }
+        .nav-links { display:flex;gap:28px;list-style:none;margin:0;padding:0; }
+        .nav-links a { font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--slate2);text-decoration:none;transition:color .2s; }
+        .nav-links a:hover { color:var(--cyan); }
+        .nav-badge { font-family:var(--font-mono);font-size:11px;padding:6px 14px;border:1px solid rgba(13,148,136,0.3);border-radius:100px;color:var(--cyan);letter-spacing:0.08em; }
+        @media (max-width:767px) {
+          nav { padding:14px 20px; }
+          .nav-links,.nav-badge { display:none !important; }
+        }
+    
+        /* ═══════════════════════════════════════════════════════
+           PROBLEM SLIDE — Mobile: horizontal scroll case-in-point
+           ═══════════════════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+          /* Stack left/right columns vertically */
+          .problem-two-col {
+            flex-direction: column !important;
+            gap: 28px !important;
+          }
+          /* Hide the vertical divider */
+          .problem-divider { display: none !important; }
+
+          /* Right col takes full width */
+          .problem-right-col {
+            flex: unset !important;
+            width: 100%;
+          }
+
+          /* ── Turn the 4-step vertical flow into a horizontal scroll ── */
+          .case-flow {
+            flex-direction: row !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 12px !important;
+            align-items: stretch !important;
+            gap: 0 !important;
+            flex: unset !important;
+          }
+          /* Each step card: fixed width, switch border from left to top */
+          .case-flow > div[style*="border-left"] {
+            flex: 0 0 200px !important;
+            min-width: 200px !important;
+            max-width: 200px;
+            border-left: none !important;
+            border-top: 3px solid !important;
+            border-radius: 8px !important;
+          }
+          /* Preserve individual border-top colours per step */
+          .case-flow > div[style*="border-left: 3px solid var(--cyan)"] {
+            border-top-color: var(--cyan) !important;
+          }
+          .case-flow > div[style*="border-left: 3px solid #ef4444"] {
+            border-top-color: #ef4444 !important;
+          }
+          .case-flow > div[style*="border-left: 3px solid #f97316"] {
+            border-top-color: #f97316 !important;
+          }
+
+          /* ── Arrow: rotate ↓ to → ── */
+          .case-arrow {
+            flex: 0 0 24px !important;
+            padding: 0 4px !important;
+            justify-content: center !important;
+            align-items: center !important;
+            flex-direction: row !important;
+          }
+          .case-arrow span {
+            font-size: 16px !important;
+            color: #475569 !important;
+          }
+          /* Override the ↓ with → using CSS */
+          .case-arrow span::before { content: '→'; }
+          .case-arrow span { font-size: 0; }
+          .case-arrow span::before { font-size: 16px; }
+
+          /* Punchline stays full width below the scroll row */
+          .problem-right-col > div:last-child {
+            margin-top: 16px !important;
+            width: 100%;
+          }
+
+          /* Scroll hint fade on right edge */
+          .case-flow::after {
+            content: '';
+            flex: 0 0 12px;
+          }
+        }
+
+        /* ═══════════════════════════════════════════════════════
+           VISION SLIDE — Mobile: reflow from absolute to normal
+           ═══════════════════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+          /* Slide becomes a normal-flow flex column */
+          #slide-vision {
+            overflow: hidden !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-end !important;
+            align-items: center !important;
+            padding: 0 0 32px !important;
+            min-height: 100vh;
+          }
+
+          /* Eyebrow: pull out of absolute, place at top */
+          .vision-eyebrow {
+            position: relative !important;
+            top: auto !important;
+            order: 1;
+            padding-top: 80px;
+          }
+
+          /* Headline block */
+          .vision-headline {
+            position: relative !important;
+            bottom: auto !important;
+            padding: 0 24px !important;
+            order: 2;
+            margin-top: 16px;
+          }
+          .vision-headline h2 {
+            font-size: clamp(28px, 7vw, 44px) !important;
+            margin-bottom: 16px !important;
+          }
+          .vision-headline p {
+            font-size: 15px !important;
+          }
+          .vision-headline > div { margin-bottom: 16px !important; }
+
+          /* Stat row: pull out of absolute, compress into single row */
+          .vision-stats {
+            position: relative !important;
+            bottom: auto !important;
+            order: 3;
+            margin-top: 28px;
+            padding: 0 8px;
+            flex-wrap: nowrap !important;
+            justify-content: center !important;
+            gap: 0;
+            width: 100%;
+          }
+
+          /* Each stat: squeeze padding, shrink font */
+          .vision-stat {
+            padding: 0 10px !important;
+            flex: 1;
+            min-width: 0;
+          }
+          .vision-stat > div:first-child {
+            font-size: 14px !important;
+            white-space: nowrap;
+          }
+          .vision-stat > div:last-child {
+            font-size: 9px !important;
+            letter-spacing: 0.12em !important;
+            margin-top: 4px !important;
+          }
+
+          /* Keep dividers but make them shorter */
+          .vision-divider {
+            height: 28px !important;
+            flex-shrink: 0;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .vision-stat { padding: 0 6px !important; }
+          .vision-stat > div:first-child { font-size: 13px !important; }
+          .vision-stat > div:last-child { font-size: 8px !important; letter-spacing: 0.08em !important; }
+          .vision-divider { height: 24px !important; }
+        }
+
+        /* ═══════════════════════════════════════════════
+           BUSINESS MODEL SLIDE — Revenue table
+           ═══════════════════════════════════════════════ */
+        .bm-table {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          border: 1px solid var(--border2);
+          border-radius: 10px;
+          overflow: hidden;
+          margin-bottom: 20px;
+        }
+
+        .bm-header {
+          display: grid;
+          grid-template-columns: 2fr 1.1fr 1.1fr 1.5fr 1.2fr 1fr;
+          gap: 0;
+          background: var(--surface2);
+          padding: 10px 20px;
+          border-bottom: 1px solid var(--border2);
+        }
+        .bm-header > div {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          font-weight: 600;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: var(--slate);
+        }
+
+        .bm-row {
+          display: grid;
+          grid-template-columns: 2fr 1.1fr 1.1fr 1.5fr 1.2fr 1fr;
+          gap: 0;
+          padding: 16px 20px;
+          border-bottom: 1px solid var(--border);
+          align-items: center;
+          background: var(--surface);
+          transition: background 0.2s;
+        }
+        .bm-row:last-child { border-bottom: none; }
+        .bm-row:hover { background: var(--surface2); }
+        .bm-row-active { background: rgba(13,148,136,0.03); }
+        .bm-row-outcome { background: rgba(22,163,74,0.03); }
+
+        .bm-col-stage {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding-right: 16px;
+        }
+        .bm-stage-num {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--font-display);
+          font-size: 14px;
+          font-weight: 700;
+          flex-shrink: 0;
+        }
+        .bm-stage-name {
+          font-family: var(--font-display);
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--white);
+          line-height: 1.2;
+        }
+        .bm-stage-sub {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--slate);
+          margin-top: 2px;
+        }
+
+        .bm-col-price {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+        .bm-price {
+          font-family: var(--font-display);
+          font-size: 18px;
+          font-weight: 700;
+          color: var(--white2);
+          line-height: 1;
+        }
+        .bm-price-note {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          color: var(--slate);
+          letter-spacing: 0.06em;
+        }
+
+        .bm-col-margin {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+        }
+        .bm-margin-bar-wrap {
+          width: 90%;
+          height: 4px;
+          background: var(--border2);
+          border-radius: 2px;
+          overflow: hidden;
+        }
+        .bm-margin-bar {
+          height: 100%;
+          border-radius: 2px;
+        }
+        .bm-margin-pct {
+          font-family: var(--font-display);
+          font-size: 13px;
+          font-weight: 700;
+          line-height: 1;
+        }
+
+        .bm-col-model {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 4px;
+          align-items: flex-start;
+        }
+        .bm-tag {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          padding: 3px 8px;
+          border-radius: 4px;
+          background: var(--surface2);
+          border: 1px solid var(--border2);
+          color: var(--slate2);
+          white-space: nowrap;
+        }
+        .bm-tag-cyan { background: rgba(13,148,136,0.08); border-color: rgba(13,148,136,0.25); color: var(--cyan); }
+        .bm-tag-amber { background: rgba(217,119,6,0.07); border-color: rgba(217,119,6,0.2); color: var(--amber); }
+        .bm-tag-green { background: rgba(22,163,74,0.07); border-color: rgba(22,163,74,0.2); color: var(--green); }
+
+        .bm-col-payback {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+        .bm-payback {
+          font-family: var(--font-display);
+          font-size: 13px;
+          font-weight: 600;
+          color: var(--white2);
+        }
+        .bm-payback-note {
+          font-size: 10px;
+          color: var(--slate);
+          line-height: 1.4;
+        }
+
+        .bm-col-status {}
+        .bm-status {
+          font-family: var(--font-mono);
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          white-space: nowrap;
+        }
+        .bm-status-live { color: var(--cyan); }
+        .bm-status-dev  { color: var(--amber); }
+        .bm-status-road { color: var(--slate); }
+
+        /* Flywheel bottom bar */
+        .bm-flywheel {
+          display: flex;
+          align-items: center;
+          gap: 0;
+          background: var(--surface2);
+          border: 1px solid var(--border2);
+          border-radius: 8px;
+          overflow: hidden;
+        }
+        .bm-flywheel-item {
+          flex: 1;
+          padding: 14px 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+        }
+        .bm-flywheel-sep {
+          width: 1px;
+          height: 40px;
+          background: var(--border2);
+          flex-shrink: 0;
+        }
+        .bm-flywheel-label {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: var(--slate);
+        }
+        .bm-flywheel-val {
+          font-family: var(--font-display);
+          font-size: 13px;
+          font-weight: 600;
+          color: var(--white2);
+          line-height: 1.3;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 1024px) {
+          .bm-header { display: none; }
+          .bm-row {
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 16px;
+          }
+          .bm-col-stage { grid-column: 1 / -1; }
+          .bm-flywheel { flex-direction: column; }
+          .bm-flywheel-sep { width: 100%; height: 1px; }
+          .bm-flywheel-item { padding: 12px 16px; }
+        }
+        @media (max-width: 480px) {
+          .bm-row { grid-template-columns: 1fr; }
+        }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">Eyescone<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#slide-market">Market</a></li>
+    <li><a href="#slide-problem">Problem</a></li>
+    <li><a href="#slide-solution">Solution</a></li>
+    <li><a href="#slide-moat">Moat</a></li>
+    <li><a href="#slide-timeline">Roadmap</a></li>
+    <li><a href="#slide-bizmodel">Business</a></li>
+    <li><a href="#slide-vision">Vision</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <!--div class="nav-badge">Seed · 2026</div-->
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="eyebrow fade-up">Physical AI · Garment Manufacturing</div>
+
+  <h1 class="hero-title fade-up fade-up-d1">
+    <span class="line1">Eyescone</span><br>
+    <span class="line2">Intelligence</span>
+  </h1>
+
+  <p class="hero-sub fade-up fade-up-d2">
+    From fabric roll to finished garment — Physical AI at every step of the line. Building the operating system for autonomous garment factories.
+  </p>
+
+  <div class="hero-stats fade-up fade-up-d3">
+    <div class="hero-stat">
+      <span class="stat-val live">Deployed</span>
+      <span class="stat-label">@ RAMCO Group</span>
+    </div>
+    <div class="hero-stat">
+      <span class="stat-val">$15B → $40B</span>
+      <span class="stat-label">Garment Automation Market</span>
+    </div>
+    <div class="hero-stat">
+      <span class="stat-val">80%</span>
+      <span class="stat-label">Stitching Still Manual</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SLIDE 2: MARKET OPPORTUNITY -->
+<div id="slide-market" class="slide bg-light">
+    <div class="content-wrapper">
+        <span class="section-label">01 · Market Opportunity</span>
+        <h2 style="color: var(--white);">The last frontier<br>of factory automation.</h2>
+        <div class="header-bar"></div>
+        <div class="three-column" style="margin-top: 36px;">
+            <div class="metric-card">
+                <div class="metric-number">$15B<span class="footnote">[1]</span></div>
+                <div class="metric-label">Garment Production Automation Market<br>Today (2026)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number">$40B<span class="footnote">[1]</span></div>
+                <div class="metric-label">Projected Market by 2033<br>12% CAGR</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number">80%<span class="footnote">[2]</span></div>
+                <div class="metric-label">Stitching & Assembly<br>Still Manual</div>
+            </div>
+        </div>
+        <div style="margin-top: 48px;">
+            <div class="card-light">
+                <h3 style="color: var(--white); margin-bottom: 32px;">Why Now?</h3>
+                <ul style="columns: 2; column-gap: 80px;">
+                    <li>Spinning & weaving automated — but stitching remains the unsolved "final mile"</li>
+                    <li>Re-shoring mandates from US & EU reducing China dependence</li>
+                    <li>Labor costs rising <b>5–10%</b> annually while robot costs fall <b>10–15%</b></li>
+                    <li><b>Technology convergence:</b> Computer Vision + Robotics + Edge AI all viable now</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- SLIDE 3: THE PROBLEM -->
+<div id="slide-problem" class="slide bg-dark">
+    <div class="content-wrapper" style="padding: 36px 56px;">
+        <span class="section-label">02 · The Problem</span>
+        <h2>AI that reports — vs AI that acts.</h2>
+        <div class="header-bar"></div>
+
+        <!-- Two-part layout: systemic problem left, inspection story right -->
+        <div class="problem-two-col" style="display: flex; gap: 40px; margin-top: 8px; align-items: stretch;">
+
+            <!-- LEFT: The systemic factory-wide problem -->
+            <div style="flex: 1.1; display: flex; flex-direction: column; gap: 12px;">
+                <div style="font-family: var(--font-display); font-size: 13px; font-weight: 300; color: var(--white2); line-height: 1.4; font-style: italic;">
+                    Every step in a garment factory runs on <strong style="font-style: normal; color: #f87171;">expensive, unreliable human labour.</strong>
+                </div>
+                <p style="font-size: 17px; color: var(--muted); line-height: 1.75;">From spreading fabric rolls to stitching the final seam — each stage depends on workers who are costly, inconsistent in quality, and increasingly hard to retain. This isn't a single-step problem. It is the entire factory floor.</p>
+
+                <!-- Two pain points side by side -->
+                <div style="display: flex; gap: 16px; margin-top: 4px;">
+                    <div style="flex: 1; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 4px; padding: 14px 16px;">
+                        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #f87171; margin-bottom: 10px;">High Cost</div>
+                        <p style="font-size: 15px; color: var(--muted); line-height: 1.65;">Labour costs rising 5–10% annually. Every manual step is a compounding cost line that erodes margins.</p>
+                    </div>
+                    <div style="flex: 1; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 4px; padding: 14px 16px;">
+                        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #f87171; margin-bottom: 10px;">Inconsistent Availability</div>
+                        <p style="font-size: 15px; color: var(--muted); line-height: 1.65;">Absenteeism, attrition, and skill variance make output quality unpredictable shift to shift.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="problem-divider" style="width: 1px; background: linear-gradient(180deg, transparent, #334155, transparent); flex-shrink: 0;"></div>
+
+            <!-- RIGHT: The inspection story — sharpest example of why passive AI fails -->
+            <div class="problem-right-col" style="flex: 1; display: flex; flex-direction: column; gap: 0;">
+                <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #fb923c; margin-bottom: 16px;">A case in point</div>
+
+                <!-- Mini flow: 4 steps stacked -->
+                <div class="case-flow" style="display: flex; flex-direction: column; gap: 0; flex: 1;">
+
+                    <div style="background: rgba(100,116,139,0.08); border-left: 3px solid var(--cyan); border-radius: 4px 4px 0 0; padding: 16px 20px;">
+                        <div style="font-size: 12px; font-weight: 600; color: var(--cyan); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 5px;">AI Fabric Inspection Machine</div>
+                        <div style="font-size: 14px; color: var(--muted);">Scans fabric. Finds defects. Generates a detailed report.</div>
+                    </div>
+
+                    <div class="case-arrow" style="display: flex; justify-content: flex-start; padding: 3px 0 3px 28px;">
+                        <span style="font-size: 14px; color: #334155;">↓</span>
+                    </div>
+
+                    <div style="background: rgba(239,68,68,0.1); border-left: 3px solid #ef4444; padding: 16px 20px;">
+                        <div style="font-size: 12px; font-weight: 600; color: #f87171; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 5px;">Report reaches the cutting master</div>
+                        <div style="font-size: 14px; color: var(--muted);">Mill owner sees value. Cutting master ignores it — works his own way.</div>
+                    </div>
+
+                    <div class="case-arrow" style="display: flex; justify-content: flex-start; padding: 3px 0 3px 28px;">
+                        <span style="font-size: 14px; color: #334155;">↓</span>
+                    </div>
+
+                    <div style="background: rgba(239,68,68,0.07); border-left: 3px solid #ef4444; padding: 16px 20px;">
+                        <div style="font-size: 12px; font-weight: 600; color: #f87171; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 5px;">Defective panels enter stitching</div>
+                        <div style="font-size: 14px; color: var(--muted);">Rework, waste, rejections pile up. The defect the AI found is now sewn in.</div>
+                    </div>
+
+                    <div class="case-arrow" style="display: flex; justify-content: flex-start; padding: 3px 0 3px 28px;">
+                        <span style="font-size: 14px; color: #334155;">↓</span>
+                    </div>
+
+                    <div style="background: rgba(249,115,22,0.1); border-left: 3px solid #f97316; border-radius: 0 0 4px 4px; padding: 16px 20px;">
+                        <div style="font-size: 12px; font-weight: 600; color: #fb923c; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 5px;">"Your product isn't useful"</div>
+                        <div style="font-size: 14px; color: var(--muted);">The owner–employee gap becomes the AI vendor's problem.</div>
+                    </div>
+
+                </div>
+
+                <!-- Punchline -->
+                <div style="margin-top: 16px; background: rgba(13,148,136,0.04); border: 1px solid rgba(13,148,136,0.18); border-left: 3px solid var(--cyan); border-radius: 6px; padding: 16px 20px;">
+                    <p style="font-size: 15px; font-style: italic; color: var(--slate2); margin: 0; line-height: 1.6;">AI in textiles cannot just report — <strong style="font-style: normal; color: var(--cyan);">it has to act.</strong> This is true at every step of the factory floor.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- SLIDE 3B: GARMENT FACTORY ROADMAP -->
+<div class="slide bg-light">
+    <div class="content-wrapper" style="padding: 32px 52px;">
+        <h2 style="color: var(--white); margin-bottom: 0;">The Garment Factory Floor</h2>
+        <div class="header-bar" style="margin: 8px 0 28px;"></div>
+        <p style="font-size: 15px; color: var(--slate2); margin: 0 0 40px;">Every step today is manual — high cost, inconsistent labour, same problem throughout the line.</p>
+
+        <!-- Current state label -->
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 40px;">
+            <div style="width: 7px; height: 7px; border-radius: 50%; background: #dc2626; flex-shrink: 0;"></div>
+            <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #dc2626;">Current State · How every garment factory runs today</span>
+            <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(220,38,38,0.3), transparent);"></div>
+        </div>
+
+        <!-- Steps row -->
+        <div style="display: flex; gap: 0; align-items: stretch;" class="factory-steps-container">
+
+            <!-- Step 01 -->
+            <div style="flex: 1; background: var(--bg); border: 1px solid #e2e8f0;  padding: 12px 10px; display: flex; flex-direction: column;">
+                <div style="font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate); margin-bottom: 5px;">01</div>
+                <div style="font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 6px; line-height: 1.3; ">Fabric Roll<br>Arrival</div>
+                <div style="font-size: 11px; color: var(--slate2); line-height: 1.5; flex: 1;">Rolls received, stored, queued for inspection</div>
+                <div style="margin-top: auto; background: #fef2f2; border-radius: 3px; padding: 4px 7px;">
+                    <span style="font-size: 10px; color: #dc2626; font-weight: 500;"> Manual</span>
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center; padding: 0 3px; background: #f1f5f9;">
+                <span style="font-size: 13px; color: #cbd5e1;">→</span>
+            </div>
+
+            <!-- Step 02: Fabric Inspection (Inspect 1) -->
+            <div style="flex: 1; background: #fffbeb; border: 1px solid #fcd34d; padding: 12px 10px; display: flex; flex-direction: column; position: relative;">
+                <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #f59e0b; color: var(--white2); font-size: 8px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border-radius: 10px; white-space: nowrap;">Inspection #1</div>
+                <div style="font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate); margin-bottom: 5px;">02</div>
+                <div style="font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 6px; line-height: 1.3;">Fabric<br>Inspection</div>
+                <div style="font-size: 11px; color: var(--slate2); line-height: 1.5; flex: 1">Roll-level defects flagged — report generated, rarely acted on</div>
+                <div style="margin-top: auto; background: #fef2f2; border-radius: 3px; padding: 4px 7px;">
+                    <span style="font-size: 10px; color: #dc2626; font-weight: 500;"> Manual + AI (unused)</span>
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center; padding: 0 3px; background: #f1f5f9;">
+                <span style="font-size: 13px; color: #cbd5e1;">→</span>
+            </div>
+
+            <!-- Step 03 -->
+            <div style="flex: 1; background: var(--bg); border: 1px solid #e2e8f0;  padding: 12px 10px; display: flex; flex-direction: column;">
+                <div style="font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate); margin-bottom: 5px;">03</div>
+                <div style="font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 6px; line-height: 1.3;">Spreading<br>&amp; Laying</div>
+                <div style="font-size: 11px; color: var(--slate2); line-height: 1.5; flex: 1">Fabric layers spread across long cutting tables by hand</div>
+                <div style="margin-top: auto; background: #fef2f2; border-radius: 3px; padding: 4px 7px;">
+                    <span style="font-size: 10px; color: #dc2626; font-weight: 500;"> Manual</span>
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center; padding: 0 3px; background: #f1f5f9;">
+                <span style="font-size: 13px; color: #cbd5e1;">→</span>
+            </div>
+
+            <!-- Step 04 -->
+            <div style="flex: 1; background: var(--bg); border: 1px solid #e2e8f0;  padding: 12px 10px; display: flex; flex-direction: column;">
+                <div style="font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate); margin-bottom: 5px;">04</div>
+                <div style="font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 6px; line-height: 1.3;">Pattern &amp;<br>Cutting</div>
+                <div style="font-size: 11px; color: var(--slate2); line-height: 1.5; flex: 1">Templates drawn, cutting master cuts with mechanical knife</div>
+                <div style="margin-top: auto; background: #fef2f2; border-radius: 3px; padding: 4px 7px;">
+                    <span style="font-size: 10px; color: #dc2626; font-weight: 500;"> Skilled Manual</span>
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center; padding: 0 3px; background: #f1f5f9;">
+                <span style="font-size: 13px; color: #cbd5e1;">→</span>
+            </div>
+
+            <!-- Step 05: Cut Panel Inspection (Inspect 2) -->
+            <div style="flex: 1; background: #fffbeb; border: 1px solid #fcd34d; border-bottom: 3px solid #f59e0b; padding: 12px 10px; position: relative; display: flex; flex-direction: column;">
+                <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #f59e0b; color: var(--white2); font-size: 8px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border-radius: 10px; white-space: nowrap;">Inspection #2</div>
+                <div style="font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate); margin-bottom: 5px;">05</div>
+                <div style="font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--white);  line-height: 1.3;">Cut Panel<br>Inspection</div>
+                <div style="font-size: 11px; color: var(--slate2); line-height: 1.5; flex: 1">Because <b>Inspection #1</b> didn't work — defects still reach here and must be caught again</div>
+                <div style="margin-top: auto; background: #fef2f2; border-radius: 3px; padding: 4px 7px;">
+                    <span style="font-size: 10px; color: #dc2626; font-weight: 500;">Skilled Manual</span>
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center; padding: 0 3px; background: #f1f5f9;">
+                <span style="font-size: 13px; color: #cbd5e1;">→</span>
+            </div>
+
+            <!-- Step 06 -->
+            <div style="flex: 1; background: var(--bg); border: 1px solid #e2e8f0; padding: 12px 10px; display: flex; flex-direction: column;">
+                <div style="font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate); margin-bottom: 5px;">06</div>
+                <div style="font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 6px; line-height: 1.3;">Stitching</div>
+                <div style="font-size: 11px; color: var(--slate2); line-height: 1.5; flex: 1">Cut panels assembled into finished garment — highest labour concentration</div>
+                <div style="margin-top: auto; background: #fef2f2; border-radius: 3px; padding: 4px 7px;">
+                    <span style="font-size: 10px; color: #dc2626; font-weight: 500;"> Manual</span>
+                </div>
+            </div>
+
+        </div>
+
+        
+
+        <!-- Redundancy callout — below phase labels -->
+        <div style="display: flex; align-items: center; gap: 10px; background: #fffbeb; border: 1px solid #fcd34d; border-left: 3px solid #f59e0b; border-radius: 4px; padding: 8px 14px; margin-top: 50px;">
+            <span style="font-size: 13px; flex-shrink: 0;">⚠️</span>
+            <p style="font-size: 11px; color: #92400e; margin: 0; line-height: 1.5; flex: 1"><strong>Inspections #1 and #2 are redundant by design</strong> — factories inspect twice because neither step fully works alone now.</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- SLIDE 4: OUR SOLUTION -->
+
+<!-- SLIDE 4: OUR SOLUTION -->
+<div id="slide-solution" class="slide bg-dark">
+    <div class="content-wrapper" style="padding: 36px 56px;">
+        <span class="section-label">03 · Solution</span>
+        <h2 style="margin-bottom: 0;">Non-linear automation — enter where ROI is highest.</h2>
+        <div class="header-bar" style="margin: 10px 0 16px;"></div>
+
+        <!-- 3 stage cards -->
+        <div style="display: grid; grid-template-columns: 1fr 32px 1fr 32px 1fr; height: 460px;">
+
+            <!-- STAGE 1 -->
+            <div style="background: var(--surface); border-top: 3px solid var(--cyan); border-radius: 4px 0 0 4px; padding: 18px 18px; overflow: hidden; display: flex; flex-direction: column;">
+                <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 5px;">Stage 1 · Now</div>
+                <div style="font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--white2); margin-bottom: 8px; line-height: 1.25;">Cut Panel Inspection</div>
+                <p style="font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 12px;">Enter at the highest-pain point. AI inspects each cut panel and physically removes defective pieces — no report, no human interference, no waste reaching stitching.</p>
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--cyan); font-size: 11px; flex-shrink:0;">✓</span>
+                        <span style="font-size: 12px; color: rgba(30,41,59,0.8);">AI acts, not just reports</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--cyan); font-size: 11px; flex-shrink:0;">✓</span>
+                        <span style="font-size: 12px; color: rgba(30,41,59,0.8);">3–6 month sales cycle — retrofits any factory</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--cyan); font-size: 11px; flex-shrink:0;">✓</span>
+                        <span style="font-size: 12px; color: rgba(30,41,59,0.8);">Replaces 7 human labour</span>
+                    </div>
+                </div>
+                <div style="margin-top: auto; background: rgba(100,116,139,0.08); border-radius: 3px; padding: 6px 12px; text-align: center;">
+                    <span style="font-size: 10px; font-weight: 600; color: var(--cyan2); letter-spacing: 0.08em;">VISION LAYER · LIVE</span>
+                </div>
+            </div>
+
+            <!-- Arrow -->
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 18px; color: var(--cyan);">→</span>
+            </div>
+
+            <!-- STAGE 2 -->
+            <div style="background: var(--surface); border-top: 3px solid var(--cyan); padding: 18px 18px; overflow: hidden; display: flex; flex-direction: column;">
+                <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 5px;">Stage 2 · 3–8 Months</div>
+                <div style="font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--white2); margin-bottom: 8px; line-height: 1.25;">Robotic Stitching Cell</div>
+                <p style="font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 12px;">Attack the biggest labour concentration. Robotic cells take over stitching — highest headcount, most inconsistent, hardest to retain. Starts with basic crew neck t shirts</p>
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--cyan); font-size: 11px; flex-shrink:0;">◦</span>
+                        <span style="font-size: 12px; color: rgba(30,41,59,0.8);">Solves fabric manipulation — robotics' hardest problem</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--cyan); font-size: 11px; flex-shrink:0;">◦</span>
+                        <span style="font-size: 12px; color: rgba(30,41,59,0.8);">Plugs directly downstream of Stage 1</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--cyan); font-size: 11px; flex-shrink:0;">◦</span>
+                        <span style="font-size: 12px; color: rgba(30,41,59,0.8);">ROI: highest labour cost eliminated first</span>
+                    </div>
+                </div>
+                <div style="margin-top: auto; background: rgba(100,116,139,0.08); border-radius: 3px; padding: 6px 12px; text-align: center;">
+                    <span style="font-size: 10px; font-weight: 600; color: var(--cyan2); letter-spacing: 0.08em;">MANIPULATION LAYER · IN DEVELOPMENT</span>
+                </div>
+            </div>
+
+            <!-- Arrow -->
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 18px; color: var(--cyan);">→</span>
+            </div>
+
+            <!-- STAGE 3 -->
+            <div style="background: var(--surface); border-top: 3px solid var(--cyan); border-radius: 0 4px 4px 0; padding: 18px 18px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 5px;">Stage 3 · 9–15 Months</div>
+                <div style="font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--white2); margin-bottom: 8px; line-height: 1.25;">Fabric Inspection + Spreader + Cutter</div>
+                <p style="font-size: 12px; color: var(--slate); line-height: 1.6; margin-bottom: 12px;">Go upstream. One machine automates everything before the stitching cell — fabric inspection that acts, automated spreading, laser cutting. Eliminates the redundant cut panel re-inspection entirely.</p>
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--cyan); font-size: 11px; flex-shrink:0;">◦</span>
+                        <span style="font-size: 12px; color: rgba(30,41,59,0.8);">Replaces spreading, laying, pattern & cutting</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--cyan); font-size: 11px; flex-shrink:0;">◦</span>
+                        <span style="font-size: 12px; color: rgba(30,41,59,0.8);">Feeds Stage 2 stitching cell autonomously</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--cyan); font-size: 11px; flex-shrink:0;">◦</span>
+                        <span style="font-size: 12px; color: rgba(30,41,59,0.8);">Stage 1 + 2 customers become natural buyers</span>
+                    </div>
+                </div>
+                <div style="margin-top: auto; background: rgba(100,116,139,0.08); border-radius: 3px; padding: 6px 12px; text-align: center;">
+                    <span style="font-size: 10px; font-weight: 600; color: var(--cyan2); letter-spacing: 0.08em;">INTELLIGENCE + VISION LAYER · ROADMAP</span>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+
+        <!-- Principle bar -->
+        <div style="margin-top: 14px; background: var(--bg); border: 1px solid var(--border); border-left: 3px solid var(--cyan); border-radius: 4px; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between;">
+            <p style="font-family: var(--font-display); font-size: 13px; font-weight: 300; color: rgba(30,41,59,0.8); font-style: italic; margin: 0;">Non-linear by design — we enter where ROI is highest, expand until the whole floor is automated.</p>
+            <div style="display: flex; gap: 24px; flex-shrink: 0; margin-left: 28px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 2px;">Each stage</div>
+                    <div style="font-size: 12px; color: var(--muted);">Independently profitable</div>
+                </div>
+                <div style="width: 1px; background: rgba(255,255,255,0.1);"></div>
+                <div style="text-align: center;">
+                    <div style="font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 2px;">Together</div>
+                    <div style="font-size: 12px; color: var(--muted);">A complete dark factory</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- SLIDE 4B: FACTORY FLOOR — Apple-style scroll sequence -->
+
+<!-- SLIDE 4B: FACTORY FLOOR — Apple-style scroll sequence -->
+<section id="factory-sequence" style="position: relative; background: var(--bg);">
+
+  <!-- ── Sticky canvas ── -->
+  <div id="factory-sticky" style="
+    position: sticky; top: 0; z-index: 20;
+    width: 100%; height: 100vh; min-height: 580px;
+    background: var(--bg);
+    display: flex; flex-direction: column;
+    overflow: visible;
+  ">
+    <!-- Subtle grid bg -->
+    <div style="position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0.045;
+      background-image:linear-gradient(rgba(15,23,42,0.6) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,0.6) 1px,transparent 1px);
+      background-size:60px 60px;
+      mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black 20%,transparent 80%);"></div>
+
+    <!-- Header -->
+    <div style="padding: 36px 72px 0; position:relative; z-index:2; flex-shrink:0;">
+      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--cyan);">Factory Floor · Automation Journey</span>
+      <div style="font-family:var(--font-display); font-size:22px; font-weight:700; color:var(--white); line-height:1.2; margin-top:6px;">From 6 manual steps → lights-out operation.</div>
+      <div style="width:48px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--cyan2));margin:10px 0 0;border-radius:2px;"></div>
+    </div>
+
+    <!-- Phase tab pills -->
+    <div id="phase-tabs" style="
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      padding: 20px 72px 0; position:relative; z-index:2; flex-shrink:0;
+    ">
+      <button class="phase-tab active" data-phase="0" onclick="setPhase(0)">
+        <span class="tab-dot"></span>Current State
+      </button>
+      <div style="width:24px;height:1px;background:var(--border2);"></div>
+      <button class="phase-tab" data-phase="1" onclick="setPhase(1)">
+        <span class="tab-dot"></span>Phase 1 · Now
+      </button>
+      <div style="width:24px;height:1px;background:var(--border2);"></div>
+      <button class="phase-tab" data-phase="2" onclick="setPhase(2)">
+        <span class="tab-dot"></span>Phase 2 · 3–8 Months
+      </button>
+      <div style="width:24px;height:1px;background:var(--border2);"></div>
+      <button class="phase-tab" data-phase="3" onclick="setPhase(3)">
+        <span class="tab-dot"></span>Phase 3 · 9–15 Months
+      </button>
+      <div style="width:24px;height:1px;background:var(--border2);"></div>
+      <button class="phase-tab" data-phase="4" onclick="setPhase(4)">
+        <span class="tab-dot"></span>Lights-Out
+      </button>
+    </div>
+
+    <!-- Phase description -->
+    <div id="phase-desc" style="
+      text-align:center; padding: 10px 72px 0; position:relative; z-index:2; flex-shrink:0;
+      font-family:var(--font-mono); font-size:12px; color:var(--cyan); letter-spacing:0.04em;
+      min-height:20px; transition: opacity 0.3s;
+    "></div>
+
+    <!-- Factory floor -->
+    <div style="flex:1; display:flex; align-items:center; padding: 16px 56px 20px; position:relative; z-index:2;">
+      <div id="factory-floor" style="width:100%; display:flex; align-items:stretch; min-height:220px; position:relative;">
+        <!-- Steps rendered by JS — always 6 DOM cells preserved -->
+      </div>
+    </div>
+
+    <!-- Legend row -->
+    <div id="phase-legend" style="display:flex;gap:20px;align-items:center;justify-content:center;padding:0 72px 20px;position:relative;z-index:2;flex-shrink:0;flex-wrap:wrap;"></div>
+
+    </div>
+  </div>
+
+</section>
+
+<style>
+/* ── Phase tab pills ── */
+.phase-tab {
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: 40px;
+  padding: 6px 16px 6px 10px;
+  color: var(--slate);
+  cursor: pointer;
+  display: flex; align-items: center; gap: 7px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.phase-tab .tab-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--border2);
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+.phase-tab.active { color: var(--white); border-color: var(--white2); background: var(--surface); }
+.phase-tab[data-phase="0"].active .tab-dot { background: var(--slate); }
+.phase-tab[data-phase="1"].active .tab-dot { background: var(--cyan); }
+.phase-tab[data-phase="2"].active .tab-dot { background: var(--slate2); }
+.phase-tab[data-phase="3"].active .tab-dot { background: var(--cyan); }
+.phase-tab[data-phase="4"].active .tab-dot { background: var(--green); }
+.phase-tab[data-phase="4"].active { border-color: var(--green); color: var(--green); }
+
+/* ── Step cells: base layout, transitions handle the morphing ── */
+.fc-step {
+  display: flex; flex-direction: column;
+  border-radius: 8px;
+  padding: 14px 12px;
+  position: relative;
+  overflow: visible;
+  transition:
+    flex 0.7s cubic-bezier(0.4,0,0.2,1),
+    background 0.55s ease,
+    border-color 0.55s ease,
+    opacity 0.45s ease,
+    transform 0.55s cubic-bezier(0.4,0,0.2,1),
+    box-shadow 0.55s ease;
+  flex: 1;
+  min-width: 0;
+}
+
+/* States */
+.fc-step.st-manual {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-top: 3px solid var(--border2);
+}
+.fc-step.st-highlight-cyan {
+  background: rgba(13,148,136,0.07);
+  border: 1.5px solid var(--cyan);
+  border-top: 3px solid var(--cyan);
+  box-shadow: 0 4px 20px rgba(13,148,136,0.12);
+}
+.fc-step.st-highlight-silver {
+  background: rgba(71,85,105,0.07);
+  border: 1.5px solid var(--slate2);
+  border-top: 3px solid var(--slate2);
+  box-shadow: 0 4px 16px rgba(71,85,105,0.1);
+}
+.fc-step.st-highlight-green {
+  background: rgba(22,163,74,0.07);
+  border: 1.5px solid var(--green);
+  border-top: 3px solid var(--green);
+  box-shadow: 0 4px 20px rgba(22,163,74,0.12);
+}
+.fc-step.st-merged {
+  /* merged: flex-grow handled inline, green final */
+  background: rgba(13,148,136,0.05);
+  border: 1.5px solid var(--cyan);
+  border-top: 3px solid var(--cyan);
+  box-shadow: 0 4px 24px rgba(13,148,136,0.15);
+}
+.fc-step.st-merged-green {
+  background: rgba(22,163,74,0.06);
+  border: 1.5px solid var(--green);
+  border-top: 3px solid var(--green);
+  box-shadow: 0 4px 24px rgba(22,163,74,0.15);
+}
+.fc-step.st-collapsed {
+  flex: 0 !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  opacity: 0;
+  border: none;
+  background: transparent;
+  pointer-events: none;
+  transform: scaleX(0);
+  overflow: hidden;
+}
+
+/* Step internals */
+.fc-num {
+  font-family: var(--font-mono);
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--slate); margin-bottom: 5px;
+  transition: color 0.4s;
+}
+.fc-num.c-cyan { color: var(--cyan); }
+.fc-num.c-silver { color: var(--slate2); }
+.fc-num.c-green { color: var(--green); }
+
+.fc-name {
+  font-family: var(--font-display);
+  font-size: 12px; font-weight: 600;
+  color: var(--white2); line-height: 1.35; flex: 1;
+  transition: color 0.4s;
+}
+.fc-badge {
+  margin-top: 10px;
+  font-size: 9px; font-weight: 600;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  padding: 3px 7px; border-radius: 4px;
+  display: inline-block; width: fit-content;
+  transition: background 0.4s, color 0.4s;
+}
+.b-manual   { background: rgba(220,38,38,0.08);   color: var(--red); }
+.b-cyan     { background: rgba(13,148,136,0.1);   color: var(--cyan); }
+.b-silver   { background: rgba(71,85,105,0.1);    color: var(--slate2); }
+.b-green    { background: rgba(22,163,74,0.08);   color: var(--green); }
+
+/* Live chip */
+.fc-live {
+  position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 8px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 10px; white-space: nowrap;
+  background: var(--cyan); color: #fff;
+  transition: opacity 0.4s;
+}
+.fc-live.lv-silver { background: var(--slate2); }
+.fc-live.lv-green  { background: var(--green); color: #fff; }
+.fc-live.lv-upstream { left: 12px; transform: none; }
+
+/* Arrows */
+.fc-arrow {
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 6px; font-size: 15px; color: var(--border2);
+  flex-shrink: 0;
+  transition: color 0.55s ease, opacity 0.55s ease, flex 0.7s ease, padding 0.7s ease;
+}
+.fc-arrow.a-cyan   { color: var(--cyan); }
+.fc-arrow.a-silver { color: var(--slate2); }
+.fc-arrow.a-green  { color: var(--green); }
+.fc-arrow.a-hidden { flex: 0; width: 0; padding: 0; margin: 0; opacity: 0; }
+
+/* Merge bracket label */
+.fc-bracket {
+  position: absolute; bottom: -22px; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--cyan); opacity: 0;
+  transition: opacity 0.5s 0.3s;
+}
+.fc-step.st-merged .fc-bracket,
+.fc-step.st-merged-green .fc-bracket { opacity: 1; }
+
+/* Business model: hide connecting line on mobile, fix principle-bar */
+@media (max-width: 1024px) {
+  .bm-connector { display: none !important; }
+  .principle-bar { flex-direction: column !important; align-items: flex-start !important; margin-left: 0 !important; }
+  .principle-bar > div:last-child { margin-left: 0 !important; flex-wrap: wrap !important; gap: 20px !important; }
+}
+</style>
+
+<script>
+(function(){
+  var TOTAL = 6, cur = 0;
+
+  // 6 fixed step definitions (always rendered)
+  var STEPS = [
+    { id:'01', name:'Fabric Roll Arrival',     baseLabel:'Manual' },
+    { id:'02', name:'Fabric Inspection',       baseLabel:'Manual' },
+    { id:'03', name:'Spreading &amp; Laying',  baseLabel:'Manual' },
+    { id:'04', name:'Pattern &amp;Cutting',   baseLabel:'Skilled Manual' },
+    { id:'05', name:'Cut Panel Inspection',    baseLabel:'Manual' },
+    { id:'06', name:'Stitching',                  baseLabel:'Manual' },
+  ];
+
+  var DESCS = [
+    'All 6 steps manual — high cost, inconsistent labour across the entire factory floor.',
+    'Phase 1 live at RAMCO Group — AI inspects every cut panel and physically removes defects. No reports. Direct action.',
+    'Phase 2 — Robotic stitching cell eliminates highest labour concentration. Stage 1 stays live, downstream now automated.',
+    'Phase 3 — Steps 01–04 collapse into one upstream machine. Fabric in → panels out, fully automated. Inspection #2 eliminated.',
+    'Lights-Out — Fabric in. Packaged garments out. Zero manual labour. Deployable anywhere in 2 weeks.'
+  ];
+
+  var LEGENDS = [
+    [
+      { color:'var(--red)', label:'Manual Labour' },
+    ],
+    [
+      { color:'var(--cyan)', label:'⚡ AI Automated (Live)' },
+      { color:'var(--red)', label:'Manual Labour' },
+    ],
+    [
+      { color:'var(--cyan)', label:'⚡ AI Automated' },
+      { color:'var(--cyan)', label:'⚙ Robotic Cell' },
+      { color:'var(--red)', label:'Manual Labour' },
+    ],
+    [
+      { color:'var(--cyan)', label:'⚙ Upstream Machine (01–04 merged)' },
+      { color:'var(--cyan)', label:'⚙ Robotic Stitching' },
+      { color:'rgba(220,38,38,0.5)', label:'Eliminated step' },
+    ],
+    [
+      { color:'var(--green)', label:'✓ Fully Autonomous' },
+    ],
+  ];
+
+  // Per phase: array of 6 state objects
+  // state = { cellClass, numClass, badgeClass, badgeText, liveText?, liveClass?, flex? }
+  // flex: numeric override for CSS flex value (null = default 1)
+  var PHASES = [
+    // 0: Current State — all manual
+    [
+      { cell:'st-manual', num:'',         badge:'b-manual',  badgeText:'Manual',         flex:null },
+      { cell:'st-manual', num:'',         badge:'b-manual',  badgeText:'Manual',         flex:null },
+      { cell:'st-manual', num:'',         badge:'b-manual',  badgeText:'Manual',         flex:null },
+      { cell:'st-manual', num:'',         badge:'b-manual',  badgeText:'Manual',         flex:null },
+      { cell:'st-manual', num:'',         badge:'b-manual',  badgeText:'Manual',         flex:null },
+      { cell:'st-manual', num:'',         badge:'b-manual',  badgeText:'Manual',         flex:null },
+    ],
+    // 1: Phase 1 — step 05 turns teal
+    [
+      { cell:'st-manual',         num:'',        badge:'b-manual',  badgeText:'Manual',         flex:null },
+      { cell:'st-manual',         num:'',        badge:'b-manual',  badgeText:'Manual',         flex:null },
+      { cell:'st-manual',         num:'',        badge:'b-manual',  badgeText:'Manual',         flex:null },
+      { cell:'st-manual',         num:'',        badge:'b-manual',  badgeText:'Manual',         flex:null },
+      { cell:'st-highlight-cyan', num:'c-cyan',  badge:'b-cyan',    badgeText:'⚡ Automated',   flex:null, live:'Phase 1 · Live', liveClass:'' },
+      { cell:'st-manual',         num:'',        badge:'b-manual',  badgeText:'Manual',         flex:null },
+    ],
+    // 2: Phase 2 — step 05 cyan, step 06 silver
+    [
+      { cell:'st-manual',           num:'',         badge:'b-manual',  badgeText:'Manual',          flex:null },
+      { cell:'st-manual',           num:'',         badge:'b-manual',  badgeText:'Manual',          flex:null },
+      { cell:'st-manual',           num:'',         badge:'b-manual',  badgeText:'Manual',          flex:null },
+      { cell:'st-manual',           num:'',         badge:'b-manual',  badgeText:'Manual',          flex:null },
+      { cell:'st-highlight-cyan',   num:'c-cyan',   badge:'b-cyan',    badgeText:'⚡ Automated',    flex:null },
+      { cell:'st-highlight-cyan',   num:'c-cyan',  badge:'b-cyan',    badgeText:'⚙ Robotic Cell',  flex:null, live:'Phase 2 · New', liveClass:'lv-silver' },
+    ],
+    // 3: Phase 3 — steps 01-04 merge (flex:3 on 01, collapse 02-04), 05 cyan, 06 silver
+    [
+      { cell:'st-merged',           num:'c-cyan',   badge:'b-cyan',    badgeText:'⚙ Vision + Intelligence',   flex:3,
+        nameOverride:'Upstream Automation<br><small style="font-size:10px;font-weight:400;color:var(--cyan);opacity:0.8;">Intake → Inspect → Spread → Cut</small>',
+        live:'Steps 01–04', liveClass:'lv-upstream', bracket:'4 steps → 1 machine' },
+      { cell:'st-collapsed',        num:'',         badge:'',          badgeText:'',                flex:null },
+      { cell:'st-collapsed',        num:'',         badge:'',          badgeText:'',                flex:null },
+      { cell:'st-collapsed',        num:'',         badge:'',          badgeText:'',                flex:null },
+      { cell:'st-highlight-cyan',   num:'c-cyan',   badge:'b-cyan',    badgeText:'⚡ Automated',    flex:null },
+      { cell:'st-highlight-cyan',   num:'c-cyan',  badge:'b-cyan',    badgeText:'⚙ Robotic Cell',  flex:null },
+    ],
+    // 4: Lights Out — all green, 01-04+05 merge into one, 06 green
+    [
+      { cell:'st-merged-green',     num:'c-green',  badge:'b-green',   badgeText:'✓ Fully Automated',  flex:4,
+        nameOverride:'Autonomous Upstream<br><small style="font-size:10px;font-weight:400;color:var(--green);opacity:0.8;">All inspection, spreading &amp; cutting</small>',
+        live:'Steps 01–05', liveClass:'lv-green lv-upstream', bracket:'5 steps → 1 machine' },
+      { cell:'st-collapsed',        num:'',         badge:'',          badgeText:'',                flex:null },
+      { cell:'st-collapsed',        num:'',         badge:'',          badgeText:'',                flex:null },
+      { cell:'st-collapsed',        num:'',         badge:'',          badgeText:'',                flex:null },
+      { cell:'st-collapsed',        num:'',         badge:'',          badgeText:'',                flex:null },
+      { cell:'st-highlight-green',  num:'c-green',  badge:'b-green',   badgeText:'⚙ Robotic Cell',  flex:null, live:'Fully Automated', liveClass:'lv-green' },
+    ],
+  ];
+
+  // Build the fixed DOM once
+  function buildFloor() {
+    var floor = document.getElementById('factory-floor');
+    if (!floor) return;
+    var html = '';
+    for (var i = 0; i < 6; i++) {
+      if (i > 0) {
+        html += '<div class="fc-arrow" id="fc-arr-' + i + '">→</div>';
+      }
+      var s = STEPS[i];
+      html += '<div class="fc-step st-manual" id="fc-cell-' + i + '">'
+        + '<div class="fc-live" id="fc-live-' + i + '" style="display:none;"></div>'
+        + '<div class="fc-num" id="fc-num-' + i + '">' + s.id + '</div>'
+        + '<div class="fc-name" id="fc-name-' + i + '">' + s.name + '</div>'
+        + '<div class="fc-badge b-manual" id="fc-badge-' + i + '">' + s.baseLabel + '</div>'
+        + '<div class="fc-bracket" id="fc-bracket-' + i + '"></div>'
+        + '</div>';
+    }
+    floor.innerHTML = html;
+  }
+
+  function applyPhase(idx) {
+    var phase = PHASES[idx];
+    for (var i = 0; i < 6; i++) {
+      var p   = phase[i];
+      var cell  = document.getElementById('fc-cell-' + i);
+      var num   = document.getElementById('fc-num-' + i);
+      var name  = document.getElementById('fc-name-' + i);
+      var badge = document.getElementById('fc-badge-' + i);
+      var live  = document.getElementById('fc-live-' + i);
+      var brack = document.getElementById('fc-bracket-' + i);
+      var arr   = i > 0 ? document.getElementById('fc-arr-' + i) : null;
+      if (!cell) continue;
+
+      // Cell class
+      cell.className = 'fc-step ' + p.cell;
+      // Flex override
+      cell.style.flex = p.flex ? p.flex : '';
+
+      // Num class
+      num.className = 'fc-num' + (p.num ? ' ' + p.num : '');
+      // Don't show num in collapsed
+      num.style.display = (p.cell === 'st-collapsed') ? 'none' : '';
+
+      // Name
+      name.innerHTML = (p.nameOverride || STEPS[i].name);
+      name.style.display = (p.cell === 'st-collapsed') ? 'none' : '';
+
+      // Badge
+      badge.className = 'fc-badge ' + (p.badge || 'b-manual');
+      badge.textContent = p.badgeText || '';
+      badge.style.display = (p.cell === 'st-collapsed' || !p.badgeText) ? 'none' : '';
+
+      // Live chip
+      if (p.live) {
+        live.className = 'fc-live ' + (p.liveClass || '');
+        live.textContent = p.live;
+        live.style.display = '';
+      } else {
+        live.style.display = 'none';
+      }
+
+      // Bracket
+      if (brack) {
+        brack.textContent = p.bracket || '';
+      }
+
+      // Arrow styling
+      if (arr) {
+        var isCollapsed = (p.cell === 'st-collapsed');
+        var prevCollapsed = (i > 0 && phase[i-1].cell === 'st-collapsed');
+        var hide = isCollapsed || (i > 0 && phase[i-1].cell === 'st-collapsed' && p.cell === 'st-collapsed');
+        // Hide arrow if this cell or the cell before it is collapsed into the merge
+        var shouldHide = false;
+        // Hide arrows 2,3,4 when 01-04 are merged (phase 3+)
+        if (idx >= 3 && i >= 1 && i <= 3) shouldHide = true;
+        // Hide arrow 5 when 01-05 are merged (phase 4)
+        if (idx >= 4 && i === 4) shouldHide = true;
+
+        arr.className = 'fc-arrow' + (shouldHide ? ' a-hidden' : '');
+        // Colour the remaining arrows
+        if (!shouldHide) {
+          if (idx >= 4) arr.className += ' a-green';
+          else if (idx >= 2 && i === 5) arr.className += ' a-silver';
+          else if (idx >= 1 && i === 4) arr.className += ' a-cyan';
+          else arr.className += '';
+        }
+      }
+    }
+
+    // Description
+    var desc = document.getElementById('phase-desc');
+    if (desc) {
+      desc.style.opacity = '0';
+      setTimeout(function(){ desc.textContent = DESCS[idx]; desc.style.opacity = '1'; }, 150);
+    }
+
+    // Legend
+    var leg = document.getElementById('phase-legend');
+    if (leg) {
+      var items = LEGENDS[idx];
+      leg.innerHTML = items.map(function(l){
+        return '<div style="display:flex;align-items:center;gap:6px;">'
+          + '<div style="width:8px;height:8px;border-radius:50%;background:' + l.color + ';flex-shrink:0;"></div>'
+          + '<span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;color:var(--slate2);">' + l.label + '</span>'
+          + '</div>';
+      }).join('<div style="width:1px;height:16px;background:var(--border2);margin:0 4px;"></div>');
+    }
+  }
+
+  function setPhase(idx) {
+    if (idx === cur) return;
+    cur = idx;
+    document.querySelectorAll('.phase-tab').forEach(function(t){
+      t.classList.toggle('active', parseInt(t.dataset.phase) === idx);
+    });
+    applyPhase(idx);
+  }
+  window.setPhase = setPhase;
+
+  document.addEventListener('DOMContentLoaded', function(){
+    buildFloor();
+    applyPhase(0);
+  });
+  if (document.readyState !== 'loading') {
+    setTimeout(function(){ buildFloor(); applyPhase(0); }, 50);
+  }
+})();
+</script>
+
+
+<!-- SLIDE 5: VISION -->
+<!-- id added inline below -->
+<div id="slide-vision" class="slide" style="background: linear-gradient(135deg, var(--bg) 0%, #f1f5f9 100%); overflow: hidden; position: relative;">
+
+    <!-- Container image — full bleed hero (with fallback styling) -->
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -42%); width: 160%; height: 160%; z-index: 1;">
+        <img src="./container.png" alt="Dark Factory Vision" style="width: 100%; height: 100%; object-fit: contain; filter: brightness(0.85) contrast(0.95) saturate(0.6) opacity(0.5);" onerror="this.style.display='none';">
+    </div>
+
+    <!-- Fallback shape if image doesn't load -->
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; height: 300px; background: radial-gradient(ellipse, rgba(13,148,136,0.15) 0%, transparent 70%); z-index: 0.5; border-radius: 20px;"></div>
+
+    <!-- Teal glow overlay -->
+    <div style="position:absolute;width:700px;height:400px;background:radial-gradient(ellipse, rgba(13,148,136,0.05) 0%, transparent 70%);top:50%;left:50%;transform:translate(-50%,-55%);z-index:2;pointer-events:none;"></div>
+
+    <!-- Vignettes — bg-tinted clean fades -->
+    <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 65%; background: linear-gradient(to top, rgba(248,250,252,1) 0%, rgba(248,250,252,0.92) 40%, rgba(248,250,252,0.6) 70%, transparent 100%); z-index: 2;"></div>
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 40%; background: linear-gradient(to bottom, rgba(248,250,252,0.95) 0%, rgba(248,250,252,0.5) 60%, transparent 100%); z-index: 2;"></div>
+    <div style="position: absolute; top: 0; left: 0; width: 20%; height: 100%; background: linear-gradient(to right, rgba(248,250,252,0.8) 0%, transparent 100%); z-index: 2;"></div>
+    <div style="position: absolute; top: 0; right: 0; width: 20%; height: 100%; background: linear-gradient(to left, rgba(248,250,252,0.8) 0%, transparent 100%); z-index: 2;"></div>
+
+    <!-- Eyebrow -->
+    <div class="vision-eyebrow" style="position: absolute; top: 80px; left: 0; width: 100%; text-align: center; z-index: 3; font-family: var(--font-mono);">
+        <p style="font-family: var(--font-body); font-size: 13px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cyan); margin: 0; font-family: var(--font-mono); letter-spacing: 0.2em;">The Vision</p>
+    </div>
+
+    <!-- Headline -->
+    <div class="vision-headline" style="position: absolute; bottom: 210px; left: 0; width: 100%; text-align: center; z-index: 3; padding: 0 120px;">
+        <h2 style="font-family: var(--font-display); font-size: 52px; font-weight: 600; line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 36px;">
+            <span style="color: var(--white);">Eyescone</span> <span style="background:linear-gradient(135deg,var(--cyan),var(--cyan2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Intelligence</span>
+        </h2>
+        <div style="width: 200px; height: 1px; background: linear-gradient(90deg, transparent 0%, #cbd5e1 50%, transparent 100%); margin: 0 auto 36px;"></div>
+        <p style="font-family: var(--font-body); font-size: 20px; font-weight: 300; color: #0d9488; margin: 0 auto; max-width: 1000px; line-height: 1.6; letter-spacing: 0.01em;">
+            A complete autonomous garment factory — every step from fabric roll to packaged garment — running lights-out, deployable anywhere in the world in 2 weeks.
+        </p>
+    </div>
+
+    <!-- Stat row -->
+    <div class="vision-stats" style="position: absolute; bottom: 80px; left: 0; width: 100%; z-index: 3; display: flex; justify-content: center; align-items: center;">
+        <div class="vision-stat" style="text-align: center; padding: 0 56px;">
+            <div style="font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--white2);">40 ft</div>
+            <div style="font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #94a3b8; margin-top: 6px;">Container</div>
+        </div>
+        <div class="vision-divider" style="width: 1px; height: 40px; background: linear-gradient(180deg, transparent, #cbd5e1, transparent);"></div>
+        <div class="vision-stat" style="text-align: center; padding: 0 56px;">
+            <div style="font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--white2);">2 Weeks</div>
+            <div style="font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #94a3b8; margin-top: 6px;">Deploy Anywhere</div>
+        </div>
+        <div class="vision-divider" style="width: 1px; height: 40px; background: linear-gradient(180deg, transparent, #cbd5e1, transparent);"></div>
+        <div class="vision-stat" style="text-align: center; padding: 0 56px;">
+            <div style="font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--white2);">Lights-Out</div>
+            <div style="font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #94a3b8; margin-top: 6px;">Operation</div>
+        </div>
+        <div class="vision-divider" style="width: 1px; height: 40px; background: linear-gradient(180deg, transparent, #cbd5e1, transparent);"></div>
+        <div class="vision-stat" style="text-align: center; padding: 0 56px;">
+            <div style="font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--white2);">$40B</div>
+            <div style="font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #94a3b8; margin-top: 6px;">Garment Automation by 2033</div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- SLIDE 7: COMPETITIVE ADVANTAGE -->
+<div id="slide-moat" class="slide bg-light">
+    <div class="content-wrapper">
+        <span class="section-label">04 · Competitive Advantage</span>
+        <h2 style="color: var(--white);">Why Eyescone wins.</h2>
+        <div class="header-bar"></div>
+        <div style="margin-top: 36px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div class="card-accent">
+                    <h4 style="color: var(--white);">Unique Team</h4>
+                    <p style="font-size: 18px; line-height: 1.7; margin-top: 16px;">
+                        <strong style="color: var(--cyan);">15 years</strong> garment production expertise<br>
+                        <strong style="font-size: 16px; color: var(--cyan);">+</strong><br>
+                        <strong style="color: var(--cyan);">20 years</strong> AI/Computer Vision experience
+                    </p>
+                    <p style="font-size: 16px; color: var(--slate2); margin-top: 20px;">
+                        For tailor-made solution
+                    </p>
+                </div>
+                
+                <div class="card-accent">
+                    <h4 style="color: var(--white);">Deployed Revenue</h4>
+                    <p style="font-size: 18px; line-height: 1.7; margin-top: 16px;">
+                        RAMCO Group deployment proves Physical AI tech at production scale
+                    </p>
+                    <p style="font-size: 16px; color: var(--slate2); margin-top: 20px;">
+                        Proven deployment
+                    </p>
+                </div>
+                
+                <div class="card-accent">
+                    <h4 style="color: var(--white);">Modular Approach</h4>
+                    <p style="font-size: 18px; line-height: 1.7; margin-top: 16px;">
+                        Incremental additions to existing factories rather than one-point monolithic solutions
+                    </p>
+                    <p style="font-size: 16px; color: var(--slate2); margin-top: 20px;">
+                        Lower barrier to adoption, progressive revenue
+                    </p>
+                </div>
+                
+                <div class="card-accent">
+                    <h4 style="color: var(--white);">Cost Advantage</h4>
+                    <p style="font-size: 18px; line-height: 1.7; margin-top: 16px;">
+                        Technology built from ground up with patent-worthy IP
+                    </p>
+                    <p style="font-size: 16px; color: var(--slate2); margin-top: 20px;">
+                        Proprietary vision-guided fabric alignment
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- SLIDE 8: TIMELINE - Responsive Timeline (Horizontal Desktop / Vertical Mobile) -->
+<div id="slide-timeline" class="slide bg-light">
+    <div class="content-wrapper">
+        <span class="section-label">05 · Roadmap</span>
+        <h2 style="color: var(--white);">The Path to Profitability</h2>
+        <p style="font-size: 16px; color: var(--slate); margin-top: 8px; margin-bottom: 48px;">Each stage independently profitable</p>
+
+        <!-- DESKTOP: Horizontal Timeline -->
+        <div style="max-width: 1200px; margin: 0 auto; position: relative; padding: 40px 0; display: none;" class="timeline-desktop">
+            
+            <!-- Horizontal timeline line -->
+            <div style="position: absolute; top: 40px; left: 5%; right: 5%; height: 2px; background: var(--cyan); z-index: 0;"></div>
+
+            <div style="display: flex; justify-content: space-between; position: relative; z-index: 1; gap: 20px;">
+
+                <!-- MILESTONE 1: NOW -->
+                <div style="flex: 1; text-align: center;">
+                    <div style="width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; background: var(--cyan); margin: 0 auto 24px; box-shadow: 0 0 0 6px rgba(13, 148, 136, 0.1); position: relative; z-index: 2;"></div>
+                    <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin: 0 0 6px;">NOW</p>
+                    <h3 style="font-size: 18px; font-weight: 600; margin: 0 0 8px 0; color: var(--white);">Stage 1 · Live</h3>
+                    <p style="font-size: 14px; color: var(--muted); margin: 0 0 16px; line-height: 1.6;">Cut panel inspection AI in Pilot</p>
+                    
+                </div>
+
+                <!-- MILESTONE 2 -->
+                <div style="flex: 1; text-align: center;">
+                    <div style="width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; background: var(--cyan); margin: 0 auto 24px; box-shadow: 0 0 0 6px rgba(13,148,136,0.1); position: relative; z-index: 2;"></div>
+                    <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin: 0 0 6px;">3–8 MONTHS</p>
+                    <h3 style="font-size: 18px; font-weight: 600; margin: 0 0 8px 0; color: var(--white);">Stage 2 · Deployment</h3>
+                    <p style="font-size: 14px; color: var(--muted); margin: 0 0 16px; line-height: 1.6;">Robotic stitching cell integration</p>
+                    
+                </div>
+
+                <!-- MILESTONE 3 -->
+                <div style="flex: 1; text-align: center;">
+                    <div style="width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; background: var(--cyan); margin: 0 auto 24px; box-shadow: 0 0 0 6px rgba(13,148,136,0.1); position: relative; z-index: 2;"></div>
+                    <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin: 0 0 6px;">9–15 MONTHS</p>
+                    <h3 style="font-size: 18px; font-weight: 600; margin: 0 0 8px 0; color: var(--white);">Stage 3 · Complete</h3>
+                    <p style="font-size: 14px; color: var(--muted); margin: 0 0 16px; line-height: 1.6;">Upstream automation (fabric + spreading + cutting)</p>
+                    
+                </div>
+
+                <!-- MILESTONE 4: OUTCOME -->
+                <div style="flex: 1; text-align: center;">
+                    <div style="width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; background: var(--green); margin: 0 auto 24px; box-shadow: 0 0 0 6px rgba(22, 163, 74, 0.1); position: relative; z-index: 2;"></div>
+                    <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin: 0 0 6px;">MONTH 16+</p>
+                    <h3 style="font-size: 18px; font-weight: 600; margin: 0 0 8px 0; color: var(--white);">Lights-Out Factory</h3>
+                    <p style="font-size: 14px; color: var(--muted); margin: 0; line-height: 1.6;">Fully autonomous garment production in a container</p>
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- MOBILE: Vertical Timeline -->
+        <div style="max-width: 700px; margin: 0 auto; position: relative; padding: 40px 0;" class="timeline-mobile">
+            
+            <!-- Vertical timeline line -->
+            <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background: linear-gradient(180deg, var(--cyan), var(--slate), transparent); z-index: 0;"></div>
+
+            <!-- MILESTONE 1: NOW -->
+            <div style="display: flex; gap: 32px; margin-bottom: 48px; position: relative; z-index: 1;">
+                <div style="flex: 1; text-align: right;">
+                    <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin: 0 0 6px;">NOW</p>
+                    <h3 style="font-size: 22px; font-weight: 600; margin: 0 0 8px 0; color: var(--white);">Stage 1 · Live</h3>
+                    <p style="font-size: 15px; color: var(--muted); margin: 0 0 16px; line-height: 1.6;">Cut panel inspection AI in Pilot</p>
+                </div>
+                <div style="width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; background: var(--cyan); flex-shrink: 0; margin-top: 4px; box-shadow: 0 0 0 6px rgba(13, 148, 136, 0.1); position: relative; z-index: 2;"></div>
+                <div style="flex: 1;"></div>
+            </div>
+
+            <!-- MILESTONE 2 -->
+            <div style="display: flex; gap: 32px; margin-bottom: 48px; position: relative; z-index: 1;">
+                <div style="flex: 1;"></div>
+                <div style="width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; background: var(--border); flex-shrink: 0; margin-top: 4px; position: relative; z-index: 2;"></div>
+                <div style="flex: 1; text-align: left;">
+                    <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate2); margin: 0 0 6px;">3–8 MONTHS</p>
+                    <h3 style="font-size: 22px; font-weight: 600; margin: 0 0 8px 0; color: var(--white);">Stage 2 · Deployment</h3>
+                    <p style="font-size: 15px; color: var(--muted); margin: 0 0 16px; line-height: 1.6;">Robotic stitching cell integration</p>
+                </div>
+            </div>
+
+            <!-- MILESTONE 3 -->
+            <div style="display: flex; gap: 32px; margin-bottom: 48px; position: relative; z-index: 1;">
+                <div style="flex: 1; text-align: right;">
+                    <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin: 0 0 6px;">9–15 MONTHS</p>
+                    <h3 style="font-size: 22px; font-weight: 600; margin: 0 0 8px 0; color: var(--white);">Stage 3 · Complete</h3>
+                    <p style="font-size: 15px; color: var(--muted); margin: 0 0 16px; line-height: 1.6;">Upstream automation (fabric + spreading + cutting)</p>
+                </div>
+                <div style="width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; background: var(--border); flex-shrink: 0; margin-top: 4px; position: relative; z-index: 2;"></div>
+                <div style="flex: 1;"></div>
+            </div>
+
+            <!-- MILESTONE 4: OUTCOME -->
+            <div style="display: flex; gap: 32px; position: relative; z-index: 1;">
+                <div style="flex: 1;"></div>
+                <div style="width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; background: var(--green); flex-shrink: 0; margin-top: 4px; box-shadow: 0 0 0 6px rgba(22, 163, 74, 0.1); position: relative; z-index: 2;"></div>
+                <div style="flex: 1; text-align: left;">
+                    <p style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin: 0 0 6px;">MONTH 16+</p>
+                    <h3 style="font-size: 22px; font-weight: 600; margin: 0 0 8px 0; color: var(--white);">Lights-Out Factory</h3>
+                    <p style="font-size: 15px; color: var(--muted); margin: 0; line-height: 1.6;">Fully autonomous garment production in a container</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Team Section -->
+        <div style="margin-top: 40px; background: var(--surface); border: 1px solid var(--border2); border-radius: 12px; padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+            <div>
+                <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate); margin-bottom: 6px;">Team Growth · 3 Years</div>
+                <div style="font-family: var(--font-display); font-size: 44px; font-weight: 800; background: linear-gradient(135deg, var(--cyan), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;">5 → 50</div>
+            </div>
+            <div style="width: 1px; height: 48px; background: var(--border2);"></div>
+            <div style="flex: 1; min-width: 200px;">
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span style="font-family: var(--font-mono); font-size: 11px; padding: 5px 12px; background: white; border: 1px solid var(--border2); border-radius: 20px; color: var(--cyan);">Robotics Engineers</span>
+                    <span style="font-family: var(--font-mono); font-size: 11px; padding: 5px 12px; background: white; border: 1px solid var(--border2); border-radius: 20px; color: var(--cyan);">Computer Vision</span>
+                    <span style="font-family: var(--font-mono); font-size: 11px; padding: 5px 12px; background: white; border: 1px solid var(--border2); border-radius: 20px; color: var(--cyan);">Sales &amp; BD</span>
+                    <span style="font-family: var(--font-mono); font-size: 11px; padding: 5px 12px; background: white; border: 1px solid var(--border2); border-radius: 20px; color: var(--cyan);">Operations</span>
+                    <span style="font-family: var(--font-mono); font-size: 11px; padding: 5px 12px; background: white; border: 1px solid var(--border2); border-radius: 20px; color: var(--cyan);">Mechanical Engineers</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Timeline responsiveness */
+@media (min-width: 1025px) {
+  .timeline-desktop { display: block !important; }
+  .timeline-mobile { display: none !important; }
+}
+
+@media (max-width: 1024px) {
+  .timeline-desktop { display: none !important; }
+  .timeline-mobile { display: block !important; }
+}
+
+/* Mobile horizontal scroll for Business Model and Factory Floor */
+@media (max-width: 1024px) {
+  .business-model-container {
+    display: flex !important;
+    grid-template-columns: unset !important;
+    gap: 0 !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 20px;
+    scroll-behavior: smooth;
+    position: relative;
+    width: 100%;
+  }
+  
+  .business-model-container::after {
+    content: '→';
+    position: sticky;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 100%;
+    flex-shrink: 0;
+    font-size: 24px;
+    color: var(--cyan);
+    font-weight: 600;
+    pointer-events: none;
+    animation: fadeInOut 2s ease-in-out infinite;
+    background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+    padding-right: 8px;
+  }
+  
+  .business-model-container > div {
+    flex: 0 0 calc(100vw - 104px);
+    min-width: 0;
+  }
+  
+  .factory-steps-container {
+    display: flex !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 20px;
+    scroll-behavior: smooth;
+    position: relative;
+    width: 100%;
+    gap: 6px;
+    padding-right: 0;
+  }
+  
+  .factory-steps-container::after {
+    content: '→';
+    position: sticky;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 100%;
+    flex-shrink: 0;
+    font-size: 18px;
+    color: var(--cyan);
+    font-weight: 600;
+    pointer-events: none;
+    animation: fadeInOut 2s ease-in-out infinite;
+    background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+    padding-right: 4px;
+  }
+  
+  .factory-steps-container > div {
+    flex: 0 0 auto;
+  }
+  
+  /* Step cards maintain reasonable width on mobile scroll */
+  .factory-steps-container > div[style*="flex: 1"] {
+    flex: 0 0 145px !important;
+    min-width: 145px;
+  }
+  
+  /* Arrows stay fixed size */
+  .factory-steps-container > div[style*="display: flex; align-items: center"] {
+    flex: 0 0 16px;
+  }
+  
+  /* Compress step card to single row with flex */
+  .fc-step {
+    padding: 8px !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  
+  .fc-num {
+    font-size: 8px !important;
+    margin-bottom: 0 !important;
+    margin-right: 3px !important;
+    flex-shrink: 0;
+  }
+  
+  .fc-name {
+    font-size: 9px !important;
+    line-height: 1.1 !important;
+    margin-bottom: 0 !important;
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .fc-badge {
+    font-size: 7px !important;
+    padding: 2px 4px !important;
+    margin-top: 0 !important;
+    flex-shrink: 0;
+    margin-left: 4px !important;
+  }
+  
+  @keyframes fadeInOut {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+}
+
+/* Business Model principle bar - Mobile two-row layout */
+@media (max-width: 1024px) {
+  .principle-bar {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 24px !important;
+  }
+  
+  .principle-bar > div:first-child {
+    font-size: 14px !important;
+    margin-bottom: 0 !important;
+    width: 100%;
+  }
+  
+  .principle-bar > div:last-child {
+    margin-left: 0 !important;
+    width: 100%;
+    gap: 32px !important;
+  }
+}
+</style>
+
+
+<!-- SLIDE 9: BUSINESS MODEL -->
+<div id="slide-bizmodel" class="slide bg-light">
+  <div class="content-wrapper" style="padding: 40px 64px;">
+    <span class="section-label">06 · Business Model</span>
+    <h2 style="color: var(--white);">Three revenue streams. Each profitable standalone.</h2>
+    <div class="header-bar" style="margin: 10px 0 24px;"></div>
+
+    <!-- Revenue table rows -->
+    <div class="bm-table">
+
+      <!-- Header row -->
+      <div class="bm-header">
+        <div class="bm-col-stage"></div>
+        <div class="bm-col-price">Price Point</div>
+        <div class="bm-col-margin">Gross Margin</div>
+        <div class="bm-col-model">Revenue Model</div>
+        <div class="bm-col-payback">Customer Payback</div>
+        <div class="bm-col-status">Status</div>
+      </div>
+
+      <!-- Stage 1 -->
+      <div class="bm-row bm-row-active">
+        <div class="bm-col-stage">
+          <div class="bm-stage-num" style="background: var(--cyan); color: white;">1</div>
+          <div>
+            <div class="bm-stage-name">Cut Panel Inspection</div>
+            <div class="bm-stage-sub">Vision Layer</div>
+          </div>
+        </div>
+        <div class="bm-col-price">
+          <span class="bm-price">₹5-6L</span>
+          <span class="bm-price-note">CapEx · one-time</span>
+        </div>
+        <div class="bm-col-margin">
+          <div class="bm-margin-bar-wrap">
+            <div class="bm-margin-bar" style="width: 45%; background: var(--cyan);"></div>
+          </div>
+          <span class="bm-margin-pct" style="color: var(--cyan);">45-50%</span>
+        </div>
+        <div class="bm-col-model">
+          <span class="bm-tag bm-tag-cyan">CapEx Sale</span>
+          <span class="bm-tag">AMC</span>
+        </div>
+        <div class="bm-col-payback">
+          <span class="bm-payback">8–12 months</span>
+          <span class="bm-payback-note">replaces 5 headcount</span>
+        </div>
+        <div class="bm-col-status">
+          <span class="bm-status bm-status-live">● Live · Pilot</span>
+        </div>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="bm-row">
+        <div class="bm-col-stage">
+          <div class="bm-stage-num" style="background: var(--slate2); color: white;">2</div>
+          <div>
+            <div class="bm-stage-name">Robotic Stitching Cell</div>
+            <div class="bm-stage-sub">Manipulation Layer</div>
+          </div>
+        </div>
+        <div class="bm-col-price">
+          <span class="bm-price">₹20-30L</span>
+          <span class="bm-price-note">per cell · or lease</span>
+        </div>
+        <div class="bm-col-margin">
+          <div class="bm-margin-bar-wrap">
+            <div class="bm-margin-bar" style="width: 62%; background: var(--slate2);"></div>
+          </div>
+          <span class="bm-margin-pct" style="color: var(--slate2);">60–65%</span>
+        </div>
+        <div class="bm-col-model">
+          <span class="bm-tag">CapEx Sale</span>
+          <span class="bm-tag bm-tag">AMC</span>
+        </div>
+        <div class="bm-col-payback">
+          <span class="bm-payback">12 months</span>
+          <span class="bm-payback-note">Replaces 7 manual labour</span>
+        </div>
+        <div class="bm-col-status">
+          <span class="bm-status bm-status-dev">◎ In Development</span>
+        </div>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="bm-row">
+        <div class="bm-col-stage">
+          <div class="bm-stage-num" style="background: #334155; color: white;">3</div>
+          <div>
+            <div class="bm-stage-name">Upstream Automation</div>
+            <div class="bm-stage-sub">Fabric → Inspect → Cut</div>
+          </div>
+        </div>
+        <div class="bm-col-price">
+          <span class="bm-price">₹40L</span>
+          <span class="bm-price-note">per system</span>
+        </div>
+        <div class="bm-col-margin">
+          <div class="bm-margin-bar-wrap">
+            <div class="bm-margin-bar" style="width: 68%; background: #334155;"></div>
+          </div>
+          <span class="bm-margin-pct" style="color: var(--slate2);">65–70%</span>
+        </div>
+        <div class="bm-col-model">
+          <span class="bm-tag">CapEx Sale</span>
+          <span class="bm-tag">Upsell to Stage 1+2 customers</span>
+        </div>
+        <div class="bm-col-payback">
+          <span class="bm-payback">10–14 months</span>
+          <span class="bm-payback-note">eliminates 12+ headcount</span>
+        </div>
+        <div class="bm-col-status">
+          <span class="bm-status bm-status-road">○ Roadmap</span>
+        </div>
+      </div>
+
+      <!-- Container row — outcome -->
+      <div class="bm-row bm-row-outcome">
+        <div class="bm-col-stage">
+          <div class="bm-stage-num" style="background: var(--green); color: white; font-size: 14px;">⬡</div>
+          <div>
+            <div class="bm-stage-name" style="color: var(--green);">Dark Factory Container</div>
+            <div class="bm-stage-sub">All 3 stages · 40 ft</div>
+          </div>
+        </div>
+        <div class="bm-col-price">
+          <span class="bm-price" style="color: var(--green);"> 250K USD</span>
+          <span class="bm-price-note">Rental or Lease</span>
+        </div>
+        <div class="bm-col-margin">
+          <div class="bm-margin-bar-wrap">
+            <div class="bm-margin-bar" style="width: 65%; background: var(--green);"></div>
+          </div>
+          <span class="bm-margin-pct" style="color: var(--green);">60–70%</span>
+        </div>
+        <div class="bm-col-model">
+          <span class="bm-tag bm-tag-green">Rental / Lease</span>
+          <span class="bm-tag bm-tag-green">250K USD /year</span>
+        </div>
+        <div class="bm-col-payback">
+          <span class="bm-payback" style="color: var(--green);">12 Months</span>
+          <span class="bm-payback-note">deploy anywhere in 2 weeks</span>
+        </div>
+        <div class="bm-col-status">
+          <span class="bm-status bm-status-road">○ Outcome</span>
+        </div>
+      </div>
+
+    </div><!-- /bm-table -->
+
+    <!-- Bottom bar: data flywheel -->
+    <div class="bm-flywheel">
+      <div class="bm-flywheel-item">
+        <div class="bm-flywheel-label">Sales Cycle</div>
+        <div class="bm-flywheel-val">3–6 months</div>
+      </div>
+      <div class="bm-flywheel-sep"></div>
+      <div class="bm-flywheel-item">
+        <div class="bm-flywheel-label">Stage 1 customers become</div>
+        <div class="bm-flywheel-val">Stage 2 &amp; 3 natural buyers</div>
+      </div>
+      <div class="bm-flywheel-sep"></div>
+      <div class="bm-flywheel-item">
+        <div class="bm-flywheel-label">Data flywheel</div>
+        <div class="bm-flywheel-val">More deploys → better AI → higher margins</div>
+      </div>
+      <div class="bm-flywheel-sep"></div>
+      <div class="bm-flywheel-item">
+        <div class="bm-flywheel-label">Target exit</div>
+        <div class="bm-flywheel-val">IPO / Strategic acquisition — ABB · KUKA · Juki</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="contact-inner">
+    <span class="section-label fade-up" style="display:block;text-align:center;">Get in Touch</span>
+    <h2 class="section-title fade-up fade-up-d1">Ready to talk?</h2>
+    <p class="section-desc fade-up fade-up-d2" style="margin:0 auto 48px;">We're actively meeting with investors who share conviction on Physical AI and the future of autonomous manufacturing.</p>
+
+    <div class="contact-details fade-up fade-up-d2">
+      <div class="contact-name">Dhamodaran Subramanian</div>
+      <div class="contact-row">
+        <a href="/cdn-cgi/l/email-protection#b3c0d7dbd2dedcd7d2c1d2ddf3d4ded2dadf9dd0dcde" class="contact-link"><span>✉</span> <span class="__cf_email__" data-cfemail="e99a8d818884868d889b8887a98e84888085c78a8684">[email&#160;protected]</span></a>
+        <div class="contact-divider"></div>
+        <a href="tel:+919790000864" class="contact-link">
+          <span>☏</span> +91 97900 00864
+        </a>
+      </div>
+      <div class="contact-location">Tamil Nadu · India</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DISCLAIMER ── -->
+<div class="disclaimer">
+  <p>All market projections and financial data are based on third-party research and internal analysis. This page is intended solely for informational purposes for prospective investors. Past deployments and traction do not guarantee future results.</p>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Nav scroll effect
+const nav = docume
